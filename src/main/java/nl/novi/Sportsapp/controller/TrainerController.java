@@ -1,14 +1,12 @@
 package nl.novi.Sportsapp.controller;
 
-import nl.novi.Sportsapp.model.Activity;
 import nl.novi.Sportsapp.model.Trainer;
-import nl.novi.Sportsapp.service.ActivityRespository;
+import nl.novi.Sportsapp.service.ActivityRepository;
 import nl.novi.Sportsapp.service.SporterRepository;
 import nl.novi.Sportsapp.service.TrainerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController //sping weet dan dat we met een restcontroller te maken hebben
@@ -21,7 +19,7 @@ public class TrainerController {
     private SporterRepository sporterRepository;
 
     @Autowired
-    private ActivityRespository activityRespository;
+    private ActivityRepository activityRepository;
 
     @GetMapping(value = "/api/trainer/{trainerId}")
     public Trainer getTrainer(@PathVariable Long activityId) {

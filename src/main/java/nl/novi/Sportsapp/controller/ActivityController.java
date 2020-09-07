@@ -1,7 +1,7 @@
 package nl.novi.Sportsapp.controller;
 
 import nl.novi.Sportsapp.model.Activity;
-import nl.novi.Sportsapp.service.ActivityRespository;
+import nl.novi.Sportsapp.service.ActivityRepository;
 import nl.novi.Sportsapp.service.SporterRepository;
 import nl.novi.Sportsapp.service.TrainerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.List;
 public class ActivityController {
 
     @Autowired
-    private ActivityRespository activityRespository;
+    private ActivityRepository activityRepository;
 
     @Autowired
     private TrainerRepository trainerRepository;
@@ -24,7 +24,7 @@ public class ActivityController {
 
     @GetMapping(value = "/api/activity")
     public List<Activity> getActivity() {
-        List<Activity> activityList = activityRespository.findAll();
+        List<Activity> activityList = activityRepository.findAll();
         return activityList;
     }
 }
