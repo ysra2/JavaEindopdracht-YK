@@ -63,9 +63,9 @@ public class Activity {
         return training;
     }
 
-    public void setTraining(Sporter training) {
-        this.training = training;
-    }
+//    public void setTraining(Trainer training) {
+//        this.training = training;
+//    }
 
     public List<Trainer> getTrainers() {
         return trainers;
@@ -73,5 +73,8 @@ public class Activity {
 
     public void setTrainers(List<Trainer> trainers) {
         this.trainers = trainers;
+    }
+
+    public void setSporters(Trainer trainerFromDb) {
     }
 }

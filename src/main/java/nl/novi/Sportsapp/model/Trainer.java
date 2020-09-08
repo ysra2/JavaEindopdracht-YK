@@ -3,6 +3,7 @@ package nl.novi.Sportsapp.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Trainer {
@@ -21,6 +22,7 @@ public class Trainer {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Activity personaltrainer;
+//    private List<Activity> activities;
 
     public Trainer(){
 
@@ -81,4 +83,13 @@ public class Trainer {
     public void setPersonaltrainer(Activity personaltrainer) {
         this.personaltrainer = personaltrainer;
     }
+//
+//    public List<Activity> getActivities() {
+//        List<Activity> activities;
+//        return activities;
+//    }
+//
+//    public void setActivities(List<Activity> dogs) {
+//        this.activities = activities;
+//    }
 }
