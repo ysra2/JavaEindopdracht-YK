@@ -17,15 +17,14 @@ public class Activity {
     private String infotrainer;
     private String traininglocation;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Sporter training;
+    @ManyToOne
+    private ActivityType activityType;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "personaltrainer")
-    private List<Trainer> trainers;
+    @ManyToMany(mappedBy = "activities")
+    private List<User> sporters;
 
-    public Activity(){
-
-    }
+    @ManyToOne
+    private User trainer;
 
     public long getActivityId() {
         return activityId;
@@ -59,22 +58,27 @@ public class Activity {
         this.traininglocation = traininglocation;
     }
 
-    public Sporter getTraining() {
-        return training;
+    public ActivityType getActivityType() {
+        return activityType;
     }
 
-//    public void setTraining(Trainer training) {
-//        this.training = training;
-//    }
-
-    public List<Trainer> getTrainers() {
-        return trainers;
+    public void setActivityType(ActivityType activityType) {
+        this.activityType = activityType;
     }
 
-    public void setTrainers(List<Trainer> trainers) {
-        this.trainers = trainers;
+    public List<User> getSporters() {
+        return sporters;
     }
 
-    public void setSporters(Trainer trainerFromDb) {
+    public void setSporters(List<User> sporters) {
+        this.sporters = sporters;
+    }
+
+    public User getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(User trainer) {
+        this.trainer = trainer;
     }
 }
