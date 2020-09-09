@@ -1,80 +1,75 @@
 package nl.novi.Sportsapp.model;
 
-
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
-public class Activity {
+    @Entity
+    public class Activity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="native")
-    @GenericGenerator(name = "native", strategy = "native")
-    private long activityId;
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO, generator="native")
+        @GenericGenerator(name = "native", strategy = "native")
+        private long activityId;
 
-    private String trainingactivity;
-    private String infotrainer;
-    private String traininglocation;
+        private String trainingactivity;
+        private String location;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Sporter training;
+        @ManyToOne
+        private ActivityType activityType;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "personaltrainer")
-    private List<Trainer> trainers;
+        @ManyToMany(mappedBy = "activities")
+        private List<AppUserSport> sporters;
 
-    public Activity(){
+        @ManyToOne
+        private AppUserSport trainer;
 
+        public long getActivityId() {
+            return activityId;
+        }
+
+        public void setActivityId(long activityId) {
+            this.activityId = activityId;
+        }
+
+        public String getTrainingactivity() {
+            return trainingactivity;
+        }
+
+        public void setTrainingactivity(String trainingactivity) {
+            this.trainingactivity = trainingactivity;
+        }
+
+        public String getLocation() {
+            return location;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
+        }
+
+        public ActivityType getActivityType() {
+            return activityType;
+        }
+
+        public void setActivityType(ActivityType activityType) {
+            this.activityType = activityType;
+        }
+
+        public List<AppUserSport> getSporters() {
+            return sporters;
+        }
+
+        public void setSporters(List<AppUserSport> sporters) {
+            this.sporters = sporters;
+        }
+
+        public AppUserSport getTrainer() {
+            return trainer;
+        }
+
+        public void setTrainer(AppUserSport trainer) {
+            this.trainer = trainer;
+        }
     }
-
-    public long getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(long activityId) {
-        this.activityId = activityId;
-    }
-
-    public String getTrainingactivity() {
-        return trainingactivity;
-    }
-
-    public void setTrainingactivity(String trainingactivity) {
-        this.trainingactivity = trainingactivity;
-    }
-
-    public String getInfotrainer() {
-        return infotrainer;
-    }
-
-    public void setInfotrainer(String infotrainer) {
-        this.infotrainer = infotrainer;
-    }
-
-    public String getTraininglocation() {
-        return traininglocation;
-    }
-
-    public void setTraininglocation(String traininglocation) {
-        this.traininglocation = traininglocation;
-    }
-
-    public Sporter getTraining() {
-        return training;
-    }
-
-//    public void setTraining(Trainer training) {
-//        this.training = training;
-//    }
-
-    public List<Trainer> getTrainers() {
-        return trainers;
-    }
-
-    public void setTrainers(List<Trainer> trainers) {
-        this.trainers = trainers;
-    }
-
-    public void setSporters(Trainer trainerFromDb) {
-    }
-}

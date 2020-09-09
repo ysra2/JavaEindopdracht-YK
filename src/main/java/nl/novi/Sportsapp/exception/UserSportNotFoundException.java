@@ -1,11 +1,11 @@
 package nl.novi.Sportsapp.exception;
 
-public class TrainerNotFoundException extends RuntimeException {
+public class UserSportNotFoundException extends RuntimeException {
 //    public TrainerNotFoundException(Long trainerId){
 //        super("Trainer" + trainerId + "niet gevonden");
 //    }
 
-    public TrainerNotFoundException (String errorMessage){
+    public UserSportNotFoundException(String errorMessage){
         super(errorMessage);
 
     }
