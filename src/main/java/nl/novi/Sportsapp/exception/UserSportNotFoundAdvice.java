@@ -12,7 +12,7 @@ public class UserSportNotFoundAdvice {
     @ResponseBody
     @ExceptionHandler(UserSportNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String SporterNotFoundHandler(UserSportNotFoundException exception){
+    public String UserSportNotFoundHandler(UserSportNotFoundException exception){
         return exception.getMessage();
     }
 }

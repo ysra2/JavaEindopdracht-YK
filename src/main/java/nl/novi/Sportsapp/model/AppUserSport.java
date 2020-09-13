@@ -16,12 +16,13 @@ public class AppUserSport {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private long userId;
-
+    //private zorgt ervoor dat het alleen toegankelijk is voor de desbetreffende klasse
     private String username;
+    private String email;
     private String password;
 
 
-    @ManyToMany
+    @ManyToMany //verschillende activitieten hebben ook verschillende trainers
     @JoinTable(name = "sporter_activity",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "activity_id"))
@@ -30,8 +31,10 @@ public class AppUserSport {
     @JsonIgnoreProperties
     //omdat de relatie bi-rationeel is zorgt deze annotatie ervoor dat
     // deze functie maar 1 keer geroepen wordt en niet oneindig
-    @OneToMany(mappedBy = "trainer")
+    @OneToMany(mappedBy = "trainer") //1 trainer kan meerdere soorten sportactiviteiten hebben/toevoegen
     private List<Activity> activiesAsTrainer;
+
+
 
     public long getUserId() {
         return userId;
@@ -47,6 +50,14 @@ public class AppUserSport {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String username) {
+        this.email = username;
     }
 
     public String getPassword() {
@@ -72,4 +83,5 @@ public class AppUserSport {
     public void setActiviesAsTrainer(List<Activity> activiesAsTrainer) {
         this.activiesAsTrainer = activiesAsTrainer;
     }
+
 }

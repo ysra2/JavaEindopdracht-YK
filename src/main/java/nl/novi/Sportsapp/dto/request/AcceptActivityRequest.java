@@ -1,22 +1,13 @@
 package nl.novi.Sportsapp.dto.request;
 
-public class AddTrainingRequest {
+public class AcceptActivityRequest {
 
-    private String activityname;
     private String activitytype;
 
-    private String address;
+    private String location;
 
     private int time;
     private int date;
-
-    public String getActivityname() {
-        return activityname;
-    }
-
-    public void setActivityname(String activityname) {
-        this.activityname = activityname;
-    }
 
     public String getActivitytype() {
         return activitytype;
@@ -26,12 +17,12 @@ public class AddTrainingRequest {
         this.activitytype = activitytype;
     }
 
-    public String getAddress() {
-        return address;
+    public String getLocation() {
+        return location;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public int getTime() {

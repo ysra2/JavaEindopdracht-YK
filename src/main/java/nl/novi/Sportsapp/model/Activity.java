@@ -16,14 +16,19 @@ import java.util.List;
         private String trainingactivity;
         private String location;
 
-        @ManyToOne
+        @ManyToOne //meerdere activiteiten kunnen maar 1 trainer hebben
         private ActivityType activityType;
 
-        @ManyToMany(mappedBy = "activities")
+        @ManyToMany(mappedBy = "activities") // sporters kunnen meerdere activiteiten kiezen
         private List<AppUserSport> sporters;
 
-        @ManyToOne
+        @ManyToOne //meerder sporters kunnen trainen bij 1 trainer
         private AppUserSport trainer;
+
+
+        public Activity(){
+
+        }
 
         public long getActivityId() {
             return activityId;
