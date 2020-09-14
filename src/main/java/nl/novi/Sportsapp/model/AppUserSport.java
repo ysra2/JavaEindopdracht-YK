@@ -10,7 +10,7 @@ import java.util.List;
 // kan front &back zijn of tussen servicelagen
 
 @Entity
-@Table(name = "app_user")
+@Table(name = "app_user_sport")
 public class AppUserSport {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")

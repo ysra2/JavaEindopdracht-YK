@@ -5,6 +5,11 @@ public class UserSportNotFoundException extends RuntimeException {
 //        super("Trainer" + trainerId + "niet gevonden");
 //    }
 
+    public UserSportNotFoundException(long id){
+        super("User"+ " " + id + " " + " not found");
+
+    }
+
     public UserSportNotFoundException(String errorMessage){
         super(errorMessage);
 

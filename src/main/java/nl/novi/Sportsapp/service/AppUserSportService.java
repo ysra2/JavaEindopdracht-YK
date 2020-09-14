@@ -1,5 +1,6 @@
 package nl.novi.Sportsapp.service;
 
+import nl.novi.Sportsapp.exception.UserSportNotFoundException;
 import nl.novi.Sportsapp.model.Activity;
 import nl.novi.Sportsapp.model.AppUserSport;
 import nl.novi.Sportsapp.repository.ActivityRepository;
@@ -9,6 +10,8 @@ import nl.novi.Sportsapp.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,22 +29,28 @@ public class AppUserSportService {
     public List<AppUserSport> getTrainers() {
         List<AppUserSport> trainerList = appUserSportRepository.findAll();
         return trainerList;
+
     }
 
-//    public AppUserSport saveTrainer(AppUserSport newTrainer) {
-//        return appUserSportRepository.save(newTrainer);
-//    }
+    public AppUserSport getTrainer(@PathVariable long id){
+        return appUserSportRepository.findById(id).orElseThrow(
+                () -> new UserSportNotFoundException(id));
+    }
+
+    public AppUserSport saveTrainer(AppUserSport newTrainer) {
+        return appUserSportRepository.save(newTrainer);
+    }
 
     public AppUserSport updateUserById(long id, AppUserSport updatedUserSport) {
         return appUserSportRepository.findById(id).map(
                 user -> {
                     user.setUsername(updatedUserSport.getUsername());
                     user.setEmail(updatedUserSport.getEmail());
+                    user.setPassword(updatedUserSport.getPassword());
                     return appUserSportRepository.save(user);
                 })
                 // Kan de user niet vinden in database
                 .orElseGet(() -> {
-                    updatedUserSport.setUserId(id);
                     return appUserSportRepository.save(updatedUserSport);
                 });
     }

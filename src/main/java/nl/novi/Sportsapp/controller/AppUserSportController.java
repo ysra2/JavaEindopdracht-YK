@@ -11,22 +11,25 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-//@RequestMapping(value = "/api/app_user")
+@RequestMapping(value = "/api/app_user_sport")
 public class AppUserSportController {
 
     @Autowired
     AppUserSportService appUserSportService;
-    AppUserSportRepository appUserSportRepository;
 
     @GetMapping("/trainer") //gegevens ophalen
     public List<AppUserSport> getTrainers() {
         return appUserSportService.getTrainers();
     }
 
-    @PostMapping(value = "/api/app_user/trainer")//localhost:8080/api/app_user_sport/trainer // gegevens trainer plaatsen
+    @GetMapping("/trainer/{id}")
+    public AppUserSport getTrainer(@PathVariable long id){
+        return appUserSportService.getTrainer(id);
+    }
+
+    @PostMapping("/trainer")//localhost:8080/api/app_user_sport/trainer // gegevens trainer plaatsen
     public AppUserSport saveTrainer(@RequestBody AppUserSport newTrainer){
-        return appUserSportRepository.save(newTrainer);
-//        return appUserSportService.saveTrainer(newTrainer);
+        return appUserSportService.saveTrainer(newTrainer);
     }
 
     @PutMapping("/trainer/{id}")// gegevens updaten, dit gaan trainers gebruiken om trainingen te updaten (in tijd/datum)
@@ -40,15 +43,10 @@ public class AppUserSportController {
 //        return appUserSportService.addActivityToTrainer(id, newActivity);
 //    }
 
-    @DeleteMapping(value = "/api/app_user/trainer/{id}") //gegevens verwijderen
+    @DeleteMapping("/trainer/{id}") //gegevens verwijderen
     public boolean deleteTrainer (@PathVariable long id){
         return appUserSportService.deleteTrainer(id);
     }
-
-
-
-
-
 
 
 }
