@@ -20,7 +20,7 @@ public class Role {
     private long id;
 
     @Enumerated(EnumType.STRING) //de vaste waardes zijn in deze situatie de trainer/sporter(/admin)
-    // er moet een onderscheid komen tuseen de twee rollen anders heeft de app zijn fucntie niet
+    // er moet een onderscheid komen tussen de twee rollen anders heeft de app zijn functie niet
     private ERole name;
 
     public Role(){

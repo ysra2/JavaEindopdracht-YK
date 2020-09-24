@@ -16,7 +16,7 @@ import java.util.List;
         private String trainingactivity;
         private String location;
 
-        @ManyToOne //meerdere activiteiten kunnen maar 1 trainer hebben
+        @ManyToOne //1 trainer kan meerdere sportactiviteiten hebben
         private ActivityType activityType;
 
         @ManyToMany(mappedBy = "activities") // sporters kunnen meerdere activiteiten kiezen

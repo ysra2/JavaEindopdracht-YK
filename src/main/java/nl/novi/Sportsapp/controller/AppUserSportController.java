@@ -1,10 +1,11 @@
 package nl.novi.Sportsapp.controller;
 
-import nl.novi.Sportsapp.model.Activity;
+import nl.novi.Sportsapp.dto.request.LoginRequest;
+import nl.novi.Sportsapp.dto.response.JwtResponse;
 import nl.novi.Sportsapp.model.AppUserSport;
-import nl.novi.Sportsapp.repository.AppUserSportRepository;
 import nl.novi.Sportsapp.service.AppUserSportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,12 +18,24 @@ public class AppUserSportController {
     @Autowired
     AppUserSportService appUserSportService;
 
+
+    @PostMapping("/login") // inloggen
+    public ResponseEntity<JwtResponse> authAppUserSport(@RequestBody LoginRequest loginRequest) {
+        return appUserSportService.authAppUserSport(loginRequest);
+    }
+
+//    @PostMapping("/sign-up") // registreren
+//    public ResponseEntity<MessageResponse> registerUser(@RequestBody SignupRequest signUpRequest) {
+//        return appUserSportService.registerUser(signUpRequest);
+//    }
+
+
     @GetMapping("/trainer") //gegevens ophalen
     public List<AppUserSport> getTrainers() {
         return appUserSportService.getTrainers();
     }
 
-    @GetMapping("/trainer/{id}")
+    @GetMapping("/trainer/{id}") // gegevens ophalen per Id trainer
     public AppUserSport getTrainer(@PathVariable long id){
         return appUserSportService.getTrainer(id);
     }

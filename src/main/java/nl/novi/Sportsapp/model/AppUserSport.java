@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 //(DTO)data transfer objecten zijn klasse/objecten die communiceren met de datalagen binnen de applicatie
 // kan front &back zijn of tussen servicelagen
@@ -34,7 +35,15 @@ public class AppUserSport {
     @OneToMany(mappedBy = "trainer") //1 trainer kan meerdere soorten sportactiviteiten hebben/toevoegen
     private List<Activity> activiesAsTrainer;
 
+    @ManyToMany // user heeft verschillende rollen en en rol heeft verschillende users
+    @JoinTable (name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
+    public AppUserSport() {
+
+    }
 
     public long getUserId() {
         return userId;
@@ -56,8 +65,8 @@ public class AppUserSport {
         return email;
     }
 
-    public void setEmail(String username) {
-        this.email = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -84,4 +93,11 @@ public class AppUserSport {
         this.activiesAsTrainer = activiesAsTrainer;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }
