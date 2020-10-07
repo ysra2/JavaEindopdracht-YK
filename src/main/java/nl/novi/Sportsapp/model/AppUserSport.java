@@ -3,7 +3,16 @@ package nl.novi.Sportsapp.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
 import java.util.Set;
 
@@ -16,11 +25,14 @@ public class AppUserSport {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
+    @Column(columnDefinition = "serial")
     private long userId;
     //private zorgt ervoor dat het alleen toegankelijk is voor de desbetreffende klasse
     private String username;
     private String email;
     private String password;
+
+
 
 
     @ManyToMany //verschillende activitieten hebben ook verschillende trainers
@@ -43,6 +55,12 @@ public class AppUserSport {
 
     public AppUserSport() {
 
+    }
+
+    public AppUserSport(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
     public long getUserId() {

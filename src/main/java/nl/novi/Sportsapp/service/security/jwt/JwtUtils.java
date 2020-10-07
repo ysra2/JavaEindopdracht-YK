@@ -1,7 +1,12 @@
 package nl.novi.Sportsapp.service.security.jwt;
 
-import io.jsonwebtoken.*;
-import nl.novi.Sportsapp.service.userdetails.UserDetailsImpl;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
+import nl.novi.Sportsapp.service.appuserdetails.AppUserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +28,7 @@ public class JwtUtils {
 
     public String generateJwtToken(Authentication authentication) {
 
-        UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+        AppUserDetailsImpl userPrincipal = (AppUserDetailsImpl) authentication.getPrincipal();
 
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))

@@ -1,4 +1,4 @@
-package nl.novi.Sportsapp.service.userdetails;
+package nl.novi.Sportsapp.service.appuserdetails;
 
 import nl.novi.Sportsapp.model.AppUserSport;
 import nl.novi.Sportsapp.repository.AppUserSportRepository;
@@ -10,21 +10,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class AppUserDetailsServiceImpl implements UserDetailsService {
 
     AppUserSportRepository appUserSportRepository;
 
     @Autowired
-    public UserDetailsServiceImpl(AppUserSportRepository userRepository) {
+    public AppUserDetailsServiceImpl(AppUserSportRepository userRepository) {
         this.appUserSportRepository = userRepository;
     }
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username)  {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUserSport user = appUserSportRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found: " + username));
-        return UserDetailsImpl.build(user);
+        return AppUserDetailsImpl.build(user);
     }
 }
 
