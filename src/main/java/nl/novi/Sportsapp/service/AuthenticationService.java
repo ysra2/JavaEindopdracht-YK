@@ -41,8 +41,8 @@ public class AuthenticationService {
     JwtUtils jwtUtils;
 
     @Autowired
-    public void setUserRepository(AppUserSportRepository userRepository) {
-        this.appUserSportRepository = userRepository;
+    public void setAppUserRepository(AppUserSportRepository appUserSportRepository) {
+        this.appUserSportRepository = appUserSportRepository;
     }
 
     @Autowired

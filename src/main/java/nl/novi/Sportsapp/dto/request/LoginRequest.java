@@ -16,8 +16,9 @@ public class LoginRequest {
     public String getPassword() {
         return password;
     }
-/// setPassword doet het niet waardoor ik niet kan inloggen
+
     public void setPassword(String password) {
         this.password = password;
     }
 }
+

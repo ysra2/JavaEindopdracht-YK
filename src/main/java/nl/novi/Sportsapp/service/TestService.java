@@ -17,12 +17,12 @@ public class TestService {
 
     @PreAuthorize("hasRole('SPORTER')")
     public String generateSporterContent() {
-        return "Admin Board.";
+        return "Sporter Board.";
     }
 
     @PreAuthorize("hasRole('TRAINER')")
     public String generateTrainerContent() {
-        return "Admin Board.";
+        return "Trainer Board.";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
