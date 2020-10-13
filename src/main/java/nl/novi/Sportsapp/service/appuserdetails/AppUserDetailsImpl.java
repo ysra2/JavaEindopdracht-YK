@@ -15,7 +15,6 @@ public class AppUserDetailsImpl implements UserDetails {
 
     private static final long serialVersionUID = 1L;
     private final Long id;
-    private final String username;
     private final String email;
 
     @JsonIgnore
@@ -23,10 +22,9 @@ public class AppUserDetailsImpl implements UserDetails {
 
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public AppUserDetailsImpl(Long id, String username, String email, String password,
+    public AppUserDetailsImpl(Long id, String email, String password,
                               Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
@@ -39,7 +37,6 @@ public class AppUserDetailsImpl implements UserDetails {
 
         return new AppUserDetailsImpl(
                 user.getUserId(),
-                user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
                 authorities);
@@ -65,8 +62,9 @@ public class AppUserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
+
 
     @Override
     public boolean isAccountNonExpired() {
@@ -100,7 +98,7 @@ public class AppUserDetailsImpl implements UserDetails {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, password, authorities);
+        return Objects.hash(id, email, password, authorities);
     }
 }
 

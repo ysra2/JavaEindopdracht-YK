@@ -65,13 +65,8 @@ public class AuthenticationService {
         this.jwtUtils = jwtUtils;
     }
 
+    //registreren
     public ResponseEntity<MessageResponse> registerUser(@Valid SignupRequest signUpRequest) {
-        if (Boolean.TRUE.equals(appUserSportRepository.existsByUsername(signUpRequest.getUsername()))) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
-        }
-
         if (Boolean.TRUE.equals(appUserSportRepository.existsByEmail(signUpRequest.getEmail()))) {
             return ResponseEntity
                     .badRequest()
@@ -79,7 +74,8 @@ public class AuthenticationService {
         }
 
         // Create new user's account
-        AppUserSport appUserSport = new AppUserSport(signUpRequest.getUsername(),
+        AppUserSport appUserSport;
+        appUserSport = new AppUserSport(
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 
@@ -126,7 +122,7 @@ public class AuthenticationService {
     public ResponseEntity<JwtResponse> authAppUserSport(@Valid LoginRequest loginRequest) {
         //authenticate op basis van de email en password door middel van de usertoken authentication
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(),
                         loginRequest.getPassword())
                 );
 

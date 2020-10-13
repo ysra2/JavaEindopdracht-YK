@@ -34,7 +34,6 @@ public class AppUserSport {
 
 
 
-
     @ManyToMany //verschillende activitieten hebben ook verschillende trainers
     @JoinTable(name = "sporter_activity",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -53,14 +52,19 @@ public class AppUserSport {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    public AppUserSport() {
 
-    }
 
-    public AppUserSport(String username, String email, String password) {
-        this.username = username;
+    public AppUserSport( String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public long getUserId() {
@@ -71,13 +75,6 @@ public class AppUserSport {
         this.userId = userId;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getEmail() {
         return email;
@@ -94,6 +91,8 @@ public class AppUserSport {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 
     public List<Activity> getActivities() {
         return activities;
