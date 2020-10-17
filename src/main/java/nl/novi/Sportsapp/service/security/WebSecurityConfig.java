@@ -17,6 +17,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+// moet er voor zorgen dat er ook met een email ingelogd kan worden ipv van de username
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
