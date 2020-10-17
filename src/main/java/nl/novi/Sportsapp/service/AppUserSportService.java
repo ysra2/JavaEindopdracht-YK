@@ -45,7 +45,6 @@ public class AppUserSportService implements IAppUserSportService {
     public AppUserSport updateUserById(long id, AppUserSport updatedUserSport) {
         return appUserSportRepository.findById(id).map(
                 user -> {
-                    user.setUsername(updatedUserSport.getUsername());
                     user.setEmail(updatedUserSport.getEmail());
                     user.setPassword(updatedUserSport.getPassword());
                     return appUserSportRepository.save(user);

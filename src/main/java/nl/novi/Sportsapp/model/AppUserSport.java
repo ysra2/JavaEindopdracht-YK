@@ -28,7 +28,6 @@ public class AppUserSport {
     @Column(columnDefinition = "serial")
     private long userId;
     //private zorgt ervoor dat het alleen toegankelijk is voor de desbetreffende klasse
-    private String username;
     private String email;
     private String password;
 
@@ -57,8 +56,7 @@ public class AppUserSport {
 
     }
 
-    public AppUserSport(String username, String email, String password) {
-        this.username = username;
+    public AppUserSport(String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -72,11 +70,7 @@ public class AppUserSport {
     }
 
     public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+        return email;
     }
 
     public String getEmail() {

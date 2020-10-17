@@ -66,11 +66,11 @@ public class AuthenticationService {
     }
 
     public ResponseEntity<MessageResponse> registerUser(@Valid SignupRequest signUpRequest) {
-        if (Boolean.TRUE.equals(appUserSportRepository.existsByUsername(signUpRequest.getUsername()))) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
-        }
+//        if (Boolean.TRUE.equals(appUserSportRepository.existsByUsername(signUpRequest.getUsername()))) {
+//            return ResponseEntity
+//                    .badRequest()
+//                    .body(new MessageResponse("Error: Username is already taken!"));
+//        }
 
         if (Boolean.TRUE.equals(appUserSportRepository.existsByEmail(signUpRequest.getEmail()))) {
             return ResponseEntity
@@ -79,7 +79,7 @@ public class AuthenticationService {
         }
 
         // Create new user's account
-        AppUserSport appUserSport = new AppUserSport(signUpRequest.getUsername(),
+        AppUserSport appUserSport = new AppUserSport(
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
 
