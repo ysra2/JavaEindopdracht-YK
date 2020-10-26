@@ -34,7 +34,6 @@ public class AppUserSport {
     private String username;
     private String email;
     private String password;
-    private String password2;
 
     @ManyToMany //verschillende activitieten hebben ook verschillende trainers
     @JoinTable(name = "sporter_activity",
@@ -58,13 +57,12 @@ public class AppUserSport {
 
     }
 
-    public AppUserSport(String firstname, String lastname, String username, String email, String password, String password2) {
+    public AppUserSport(String firstname, String lastname, String username, String email, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.password2 = password2;
     }
 
     public long getUserId() {
@@ -109,10 +107,6 @@ public class AppUserSport {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPassword2() {
-        return password;
     }
 
     public List<Activity> getActivities() {

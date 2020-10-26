@@ -84,7 +84,7 @@ public class AuthenticationService {
                 signUpRequest.getLastname(),
                 signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()), signUpRequest.getPassword2());
+                encoder.encode(signUpRequest.getPassword()));
 
 
         Set<String> strRoles = signUpRequest.getRole();
