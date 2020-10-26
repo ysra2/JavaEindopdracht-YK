@@ -1,11 +1,10 @@
 package nl.novi.Sportsapp.controller;
 
 import nl.novi.Sportsapp.model.Activity;
-import nl.novi.Sportsapp.model.AppUserSport;
 import nl.novi.Sportsapp.service.ActivityService;
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 //Single responsibility principle
@@ -27,4 +26,13 @@ public class ActivityController {
         return activityService.getActivities();
     }
 
+//    @GetMapping
+//    public List<Activity> findActivityByPostalcode(String postalcode){
+//        return activityService.getActivities();
+//    }
+
+    @PutMapping("/trainer/{trainerId}")//updaten
+    public Activity updateTrainingById(@PathVariable long trainerId, @RequestBody Activity updateActivity) {
+        return activityService.updateTrainingById(trainerId, updateActivity);
+    }
 }

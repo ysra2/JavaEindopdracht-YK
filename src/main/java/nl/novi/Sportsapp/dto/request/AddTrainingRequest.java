@@ -1,31 +1,38 @@
 package nl.novi.Sportsapp.dto.request;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class AddTrainingRequest {
 
-    private String activityname;
-    private String activitytype;
+    @NotBlank
+    @Size(min = 3)
+    private String sportsActivity;
+    private String nameTrainer;
 
+    @NotBlank
+    @Size(min = 3)
     private String address;
 
+    @NotBlank
     private int time;
     private int date;
 
-    public String getActivityname() {
-        return activityname;
+
+    public String getSportsActivity() {
+        return sportsActivity;
     }
 
-    public void setActivityname(String activityname) {
-        this.activityname = activityname;
+    public void setSportsActivity(String sportsActivity) {
+        this.sportsActivity = sportsActivity;
+    }
+    public String getNameTrainer() {
+        return nameTrainer;
     }
 
-    public String getActivitytype() {
-        return activitytype;
+    public void setNameTrainer(String nameTrainer) {
+        this.nameTrainer = nameTrainer;
     }
-
-    public void setActivitytype(String activitytype) {
-        this.activitytype = activitytype;
-    }
-
     public String getAddress() {
         return address;
     }

@@ -2,12 +2,9 @@ package nl.novi.Sportsapp.service;
 
 
 import nl.novi.Sportsapp.model.Activity;
-import nl.novi.Sportsapp.model.AppUserSport;
 import nl.novi.Sportsapp.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -24,5 +21,29 @@ public class ActivityService {
     }
 
 
+//    public List<Activity> findActivityByPostalcode(String postalcode){
+//        List<Activity> activity = new ArrayList<>();
+//
+//        List<Activity> foundActivity = activityRepository.findByPostalCode(postalcode);
+//
+//        return activity;
+//
+//    }
 
+    public Activity updateTrainingById(long trainerId, Activity updateActivity) {
+        return activityRepository.findById(trainerId).map(
+                user -> {
+                    user.setSportsActivity(updateActivity.getSportsActivity());
+                    user.setLocation(updateActivity.getLocation());
+                    user.setNameTrainer(updateActivity.getNameTrainer());
+                    user.setDate(updateActivity.getDate());
+                    user.setTime(updateActivity.getTime());
+                    return activityRepository.save(user);
+                })
+                // Kan de user niet vinden in database
+                .orElseGet(() -> {
+                    updateActivity.setActivityId(trainerId);
+                    return activityRepository.save(updateActivity);
+                });
+    }
 }

@@ -20,21 +20,11 @@ public class ActivityTypeService {
         return activityTypeList;
     }
 
-    public ActivityType updateTrainingById(long trainerId, ActivityType updateTraining) {
-        return activityTypeRepository.findById(trainerId).map(
-                user -> {
-                    user.setActivityname(updateTraining.getActivityname());
-                    user.setLocation(updateTraining.getLocation());
-                    user.setDate(updateTraining.getDate());
-                    user.setTime(updateTraining.getTime());
-                    return activityTypeRepository.save(user);
-                })
-                // Kan de user niet vinden in database
-                .orElseGet(() -> {
-                    updateTraining.setActivityTypeId(trainerId);
-                    return activityTypeRepository.save(updateTraining);
-                });
+    public ActivityType saveActivityTypeTrainer(ActivityType saveActivityType){
+        return activityTypeRepository.save(saveActivityType);
     }
+
+
 
 
 

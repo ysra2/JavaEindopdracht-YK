@@ -20,8 +20,10 @@ public class ActivityTypeController {
         return activityTypeService.getActivityType();
     }
 
-    @PutMapping("trainer/{trainerId}")//updaten
-    public ActivityType updateTrainingById(@PathVariable long trainerId, @RequestBody ActivityType updateActivityType) {
-        return activityTypeService.updateTrainingById(trainerId, updateActivityType);
+    //Voeg sportactiviteit toe aan trainer
+    @PostMapping
+    public ActivityType saveActivityTypeTrainer(@RequestBody ActivityType saveActivityType){
+        return activityTypeService.saveActivityTypeTrainer(saveActivityType);
     }
+
 }
