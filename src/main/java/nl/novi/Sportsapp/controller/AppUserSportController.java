@@ -21,12 +21,13 @@ public class AppUserSportController {
         return appUserSportService.getTrainers();
     }
 
-    @GetMapping("/api/app_user_sport/trainer/{id}") // gegevens ophalen per Id trainer
-    public AppUserSport getTrainer(@PathVariable long id){
-        return appUserSportService.getTrainer(id);
+
+    @GetMapping("/api/app_user_sport/trainer/{userId}") // gegevens ophalen per Id trainer
+    public AppUserSport getTrainer(@PathVariable long userId){
+        return appUserSportService.getTrainer(userId);
     }
 
-    @PostMapping("/api/app_user_sport/trainer")//localhost:8080/api/app_user_sport/trainer // gegevens trainer plaatsen
+    @PostMapping("/api/app_user_sport/trainer/save")//localhost:8080/api/app_user_sport/trainer // gegevens trainer plaatsen
     public AppUserSport saveTrainer(@RequestBody AppUserSport newTrainer){
         return appUserSportService.saveTrainer(newTrainer);
     }

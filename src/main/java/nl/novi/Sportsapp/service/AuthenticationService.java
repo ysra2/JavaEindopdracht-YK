@@ -66,11 +66,11 @@ public class AuthenticationService {
     }
 
     public ResponseEntity<MessageResponse> registerUser(@Valid SignupRequest signUpRequest) {
-//        if (Boolean.TRUE.equals(appUserSportRepository.existsByUsername(signUpRequest.getUsername()))) {
-//            return ResponseEntity
-//                    .badRequest()
-//                    .body(new MessageResponse("Error: Username is already taken!"));
-//        }
+        if (Boolean.TRUE.equals(appUserSportRepository.existsByUsername(signUpRequest.getUsername()))) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username is already in use!"));
+        }
 
         if (Boolean.TRUE.equals(appUserSportRepository.existsByEmail(signUpRequest.getEmail()))) {
             return ResponseEntity
@@ -80,8 +80,12 @@ public class AuthenticationService {
 
         // Create new user's account
         AppUserSport appUserSport = new AppUserSport(
+                signUpRequest.getFirstname(),
+                signUpRequest.getLastname(),
+                signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+                encoder.encode(signUpRequest.getPassword()), signUpRequest.getPassword2());
+
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -119,6 +123,7 @@ public class AuthenticationService {
         appUserSport.setRoles(roles);
         appUserSportRepository.save(appUserSport);
 
+
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
@@ -128,7 +133,7 @@ public class AuthenticationService {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
                         loginRequest.getPassword())
-                );
+        );
 
         //opgehaald neergezet
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -145,7 +150,7 @@ public class AuthenticationService {
         //geeft terug aan response entity
         //status ok is 202 in postman
         return ResponseEntity.ok(new JwtResponse(jwt,
-                userDetails.getId(),
+                userDetails.getUserId(),
                 userDetails.getEmail(),
                 userDetails.getPassword(),
                 roles
@@ -153,7 +158,5 @@ public class AuthenticationService {
     }
 
 
-
-
-
 }
+

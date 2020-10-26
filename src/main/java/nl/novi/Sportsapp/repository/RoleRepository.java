@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
-    Optional<Role> findByName(ERole name); // geeft aan welke gevens van ieder role in de database verwerkt moeten worden
+    Optional<Role> findByName(ERole name); // geeft aan welke gegevens van ieder role in de database verwerkt moeten worden
 }

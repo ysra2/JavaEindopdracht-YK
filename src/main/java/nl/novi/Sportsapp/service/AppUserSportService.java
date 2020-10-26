@@ -29,9 +29,9 @@ public class AppUserSportService implements IAppUserSportService {
 
     @PreAuthorize("hasRole('TRAINER')")
     @Override
-    public AppUserSport getTrainer(long id){
-        return appUserSportRepository.findById(id).orElseThrow(
-                () -> new UserSportNotFoundException(id));
+    public AppUserSport getTrainer(long userId){
+        return appUserSportRepository.findById(userId).orElseThrow(
+                () -> new UserSportNotFoundException(userId));
     }
 
     @PreAuthorize("hasRole('TRAINER')")
@@ -74,15 +74,16 @@ public class AppUserSportService implements IAppUserSportService {
     @PreAuthorize("hasRole('TRAINER')")
     @Override
     public boolean deleteTrainer(long id){
-    Optional<AppUserSport> trainer =appUserSportRepository.findById(id);
-    if (trainer.isPresent()){
-        appUserSportRepository.deleteById(id);
-        return true;
-    } else{
-        return false;
-    }
+        Optional<AppUserSport> trainer =appUserSportRepository.findById(id);
+        if (trainer.isPresent()){
+            appUserSportRepository.deleteById(id);
+            return true;
+        } else{
+            return false;
+        }
     }
 
 
 
 }
+

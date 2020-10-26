@@ -28,11 +28,13 @@ public class AppUserSport {
     @Column(columnDefinition = "serial")
     private long userId;
     //private zorgt ervoor dat het alleen toegankelijk is voor de desbetreffende klasse
+    private String firstname;
+    private String lastname;
+
+    private String username;
     private String email;
     private String password;
-
-
-
+    private String password2;
 
     @ManyToMany //verschillende activitieten hebben ook verschillende trainers
     @JoinTable(name = "sporter_activity",
@@ -56,9 +58,13 @@ public class AppUserSport {
 
     }
 
-    public AppUserSport(String email, String password) {
+    public AppUserSport(String firstname, String lastname, String username, String email, String password, String password2) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
         this.email = email;
         this.password = password;
+        this.password2 = password2;
     }
 
     public long getUserId() {
@@ -67,6 +73,22 @@ public class AppUserSport {
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getUsername() {
@@ -87,6 +109,10 @@ public class AppUserSport {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPassword2() {
+        return password;
     }
 
     public List<Activity> getActivities() {

@@ -17,7 +17,7 @@ public class Role {
             strategy = "native"
     )
     @Column(columnDefinition = "serial")
-    private long id;
+    private long userId;
 
     @Enumerated(EnumType.STRING) //de vaste waardes zijn in deze situatie de trainer/sporter(/admin)
     // er moet een onderscheid komen tussen de twee rollen anders heeft de app zijn functie niet
@@ -27,12 +27,12 @@ public class Role {
 
     }
 
-    public long getId() {
-        return id;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public ERole getName() {
