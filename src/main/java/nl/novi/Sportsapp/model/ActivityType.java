@@ -15,10 +15,7 @@ public class ActivityType {
     @GenericGenerator(name = "native", strategy = "native")
     private long activityTypeId;
 
-    private String activityname;
-    private String location;
-    private int time;
-    private int date;
+    private String activityName;
 
     public ActivityType(){
 
@@ -32,35 +29,13 @@ public class ActivityType {
         this.activityTypeId = activityTypeId;
     }
 
-    public String getActivityname() {
-        return activityname;
+    public String getActivityName() {
+        return activityName;
     }
 
-    public void setActivityname(String activityname) {
-        this.activityname = activityname;
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
     }
 
-    public String getLocation() {
-        return location;
-    }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public int getTime() {
-        return time;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
-    }
-
-    public int getDate() {
-        return date;
-    }
-
-    public void setDate(int date) {
-        this.date = date;
-    }
 }

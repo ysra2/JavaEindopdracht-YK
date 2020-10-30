@@ -9,7 +9,6 @@ public interface IAppUserSportService {
    List<AppUserSport> getTrainers();
    AppUserSport getTrainer(long id);
    AppUserSport saveTrainer(AppUserSport newTrainer);
-   AppUserSport updateUserById(long id, AppUserSport updatedUserSport);
    boolean deleteTrainer(long id);
 
 }

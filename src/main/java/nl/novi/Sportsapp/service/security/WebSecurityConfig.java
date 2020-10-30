@@ -1,7 +1,7 @@
 package nl.novi.Sportsapp.service.security;
 
-import nl.novi.Sportsapp.service.security.jwt.AuthTokenFilter;
 import nl.novi.Sportsapp.service.security.jwt.AuthEntryPointJwt;
+import nl.novi.Sportsapp.service.security.jwt.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;

@@ -45,7 +45,7 @@ public class AppUserSport {
     //omdat de relatie bi-rationeel is zorgt deze annotatie ervoor dat
     // deze functie maar 1 keer geroepen wordt en niet oneindig
     @OneToMany(mappedBy = "trainer") //1 trainer kan meerdere soorten sportactiviteiten hebben/toevoegen
-    private List<Activity> activiesAsTrainer;
+    private List<Activity> activitiesAsTrainer;
 
     @ManyToMany // user heeft verschillende rollen en en rol heeft verschillende users
     @JoinTable (name = "user_role",
@@ -117,12 +117,12 @@ public class AppUserSport {
         this.activities = activities;
     }
 
-    public List<Activity> getActiviesAsTrainer() {
-        return activiesAsTrainer;
+    public List<Activity> getActivitiesAsTrainer() {
+        return activitiesAsTrainer;
     }
 
-    public void setActiviesAsTrainer(List<Activity> activiesAsTrainer) {
-        this.activiesAsTrainer = activiesAsTrainer;
+    public void setActivitiesAsTrainer(List<Activity> activitiesAsTrainer) {
+        this.activitiesAsTrainer = activitiesAsTrainer;
     }
 
     public Set<Role> getRoles() {

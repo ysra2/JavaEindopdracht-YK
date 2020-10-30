@@ -40,21 +40,6 @@ public class AppUserSportService implements IAppUserSportService {
         return appUserSportRepository.save(newTrainer);
     }
 
-    @PreAuthorize("hasRole('TRAINER')")
-    @Override
-    public AppUserSport updateUserById(long id, AppUserSport updatedUserSport) {
-        return appUserSportRepository.findById(id).map(
-                user -> {
-                    user.setEmail(updatedUserSport.getEmail());
-                    user.setPassword(updatedUserSport.getPassword());
-                    return appUserSportRepository.save(user);
-                })
-                // Kan de user niet vinden in database
-                .orElseGet(() -> {
-                    return appUserSportRepository.save(updatedUserSport);
-                });
-    }
-
 //    public AppUserSport addActivityToTrainer(long id,  Activity newActivity){
 //        Optional<Activity> trainer = activityRepository.findById(id);
 //

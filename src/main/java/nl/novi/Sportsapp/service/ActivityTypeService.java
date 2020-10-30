@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ActivityTypeService {
+public class ActivityTypeService implements IActivityTypeService {
 
     @Autowired
     ActivityTypeRepository activityTypeRepository;
@@ -20,13 +20,15 @@ public class ActivityTypeService {
         return activityTypeList;
     }
 
+    public ActivityType saveActivityTypeTrainer(ActivityType saveActivityType){
+        return activityTypeRepository.save(saveActivityType);
+    }
+
+    @Override
     public ActivityType updateTrainingById(long trainerId, ActivityType updateTraining) {
         return activityTypeRepository.findById(trainerId).map(
                 user -> {
-                    user.setActivityname(updateTraining.getActivityname());
-                    user.setLocation(updateTraining.getLocation());
-                    user.setDate(updateTraining.getDate());
-                    user.setTime(updateTraining.getTime());
+                    user.setActivityName(updateTraining.getActivityName());
                     return activityTypeRepository.save(user);
                 })
                 // Kan de user niet vinden in database
