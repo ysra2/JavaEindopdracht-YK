@@ -28,10 +28,13 @@ public class Activity {
     @ManyToOne
     private AppUserSport trainer;
 
+    public Activity() {
+    }
+
     public Activity(String location, int time, int date) {
-    this.location = location;
-    this.time = time;
-    this.date = date;
+        this.location = location;
+        this.time = time;
+        this.date = date;
     }
 
     public long getActivityId() {

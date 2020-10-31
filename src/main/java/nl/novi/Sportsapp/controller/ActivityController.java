@@ -2,10 +2,13 @@ package nl.novi.Sportsapp.controller;
 
 import nl.novi.Sportsapp.dto.request.AddTrainingRequest;
 import nl.novi.Sportsapp.dto.response.MessageResponse;
+import nl.novi.Sportsapp.model.Activity;
 import nl.novi.Sportsapp.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 //Single responsibility principle
 //Controller heeft maar 1 taak en dat is de data van de restpoint binnen te krijgen en door te geven
@@ -18,17 +21,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/activity")
 public class ActivityController {
 
+
     @Autowired //deze wordt gekoppeld met de service klasse
             ActivityService activityService;
 
-//    @GetMapping //downloaden
-//    public List<Activity> getActivities() {
-//        return activityService.getActivities();
-//    }
+    @GetMapping //downloaden
+    public List<Activity> getActivities() {
+        return activityService.getActivities();
+    }
 
-    @PostMapping // activiteit toevoegen
-    public ResponseEntity<MessageResponse> addTraining(@RequestBody AddTrainingRequest addTrainingRequest) {
-        return activityService.addTraining(addTrainingRequest);
+    @PostMapping(value = "{trainerId}") // activiteit toevoegen
+    public ResponseEntity<MessageResponse> addTraining(@RequestBody AddTrainingRequest addTrainingRequest
+            , @PathVariable Long trainerId) {
+        return activityService.addTraining(trainerId, addTrainingRequest);
     }
 
 //    @PutMapping("/trainer/{userId}")
