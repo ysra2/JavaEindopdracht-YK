@@ -20,14 +20,12 @@ public class AppUserSportService implements IAppUserSportService {
     @Autowired
     AppUserSportRepository appUserSportRepository;
 
-    @PreAuthorize("hasRole('TRAINER')")
     @Override
     public List<AppUserSport> getTrainers() {
         List<AppUserSport> trainerList = appUserSportRepository.findAll();
         return trainerList;
     }
 
-    @PreAuthorize("hasRole('TRAINER')")
     @Override
     public AppUserSport getTrainer(long userId){
         return appUserSportRepository.findById(userId).orElseThrow(

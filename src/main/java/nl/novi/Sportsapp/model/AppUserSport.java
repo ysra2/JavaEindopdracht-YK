@@ -3,16 +3,7 @@ package nl.novi.Sportsapp.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
@@ -44,7 +35,8 @@ public class AppUserSport {
     @JsonIgnoreProperties
     //omdat de relatie bi-rationeel is zorgt deze annotatie ervoor dat
     // deze functie maar 1 keer geroepen wordt en niet oneindig
-    @OneToMany(mappedBy = "trainer") //1 trainer kan meerdere soorten sportactiviteiten hebben/toevoegen
+    @OneToMany(mappedBy = "trainer", fetch = FetchType.LAZY)
+    //1 trainer kan meerdere soorten sportactiviteiten hebben/toevoegen
     private List<Activity> activitiesAsTrainer;
 
     @ManyToMany // user heeft verschillende rollen en en rol heeft verschillende users

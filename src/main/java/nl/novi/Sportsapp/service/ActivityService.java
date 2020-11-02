@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,22 +63,21 @@ public class ActivityService implements IActivityService {
                 .body(new MessageResponse("Trainer not found."));
     }
 
-//    @PreAuthorize("hasRole('TRAINER')")
-//    @Override
-//    public Activity updateUserById(@Valid long userId, Activity updateTrainerActivity) {
-//        return activityRepository.findById(userId).map(
-//                trainer -> {
-//                    trainer.setTrainingactivity(updateTrainerActivity.getTrainingactivity());
-//                    trainer.setNameTrainer(updateTrainerActivity.getNameTrainer());
-//                    trainer.setLocation(updateTrainerActivity.getLocation());
-//                    trainer.setTime(updateTrainerActivity.getTime());
-//                    trainer.setDate(updateTrainerActivity.getDate());
-//                    return activityRepository.save(trainer);
-//                })
-//                // Kan de user niet vinden in database
-//                .orElseGet(() -> {
-//                    return activityRepository.save(updateTrainerActivity);
-//                });
-//    }
+    @PreAuthorize("hasRole('TRAINER')")
+    @Override
+    public Activity updateUserById(@Valid Long trainerId,  Activity updateTrainerActivity) {
+        return activityRepository.findById(trainerId).map(
+                trainer -> {
+//                    trainer.setActivityType(updateTrainerActivity.getActivityType());
+                    trainer.setLocation(updateTrainerActivity.getLocation());
+                    trainer.setTime(updateTrainerActivity.getTime());
+                    trainer.setDate(updateTrainerActivity.getDate());
+                    return activityRepository.save(trainer);
+                })
+                // Kan de user niet vinden in database
+                .orElseGet(() -> {
+                    return activityRepository.save(updateTrainerActivity);
+                });
+    }
 
 }

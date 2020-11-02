@@ -31,14 +31,15 @@ public class ActivityController {
     }
 
     @PostMapping(value = "{trainerId}") // activiteit toevoegen
-    public ResponseEntity<MessageResponse> addTraining(@RequestBody AddTrainingRequest addTrainingRequest
-            , @PathVariable Long trainerId) {
+    public ResponseEntity<MessageResponse> addTraining(@RequestBody AddTrainingRequest addTrainingRequest,
+             @PathVariable Long trainerId) {
         return activityService.addTraining(trainerId, addTrainingRequest);
     }
 
-//    @PutMapping("/trainer/{userId}")
-//    // gegevens updaten, dit gaan trainers gebruiken om trainingen te updaten (in tijd/datum)
-//    public Activity updateUserById(@PathVariable long userId, @RequestBody Activity updateTrainerActivity) {
-//        return activityService.updateUserById(userId, updateTrainerActivity);
-//    }
+    @PutMapping("{trainerId}")
+    // gegevens updaten, dit gaan trainers gebruiken om trainingen te updaten (in tijd/datum)
+    public Activity updateUserById(@RequestBody Activity updateTrainerActivity,
+            @PathVariable Long trainerId) {
+        return activityService.updateUserById(trainerId, updateTrainerActivity);
+    }
 }

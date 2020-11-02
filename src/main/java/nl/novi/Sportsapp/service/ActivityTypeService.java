@@ -1,6 +1,7 @@
 package nl.novi.Sportsapp.service;
 
 
+import nl.novi.Sportsapp.dto.request.AddActivityTypeToTrainer;
 import nl.novi.Sportsapp.model.ActivityType;
 import nl.novi.Sportsapp.repository.ActivityTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class ActivityTypeService implements IActivityTypeService {
     }
 
     @Override
-    public ActivityType updateTrainingById(long trainerId, ActivityType updateTraining) {
+    public ActivityType updateTrainingById(long trainerId, ActivityType updateTraining, AddActivityTypeToTrainer addActivityTypeToTrainer) {
         return activityTypeRepository.findById(trainerId).map(
                 user -> {
                     user.setActivityName(updateTraining.getActivityName());

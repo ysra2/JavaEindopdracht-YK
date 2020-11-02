@@ -10,5 +10,6 @@ public interface IAppUserSportService {
    AppUserSport getTrainer(long id);
    AppUserSport saveTrainer(AppUserSport newTrainer);
    boolean deleteTrainer(long id);
+//   AppUserSport saveTrainer(AppUserSport newTrainer, AddActivityTypeToTrainer addActivityTypeToTrainer);
 
 }
