@@ -32,14 +32,14 @@ public class ActivityController {
 
     @PostMapping(value = "{trainerId}") // activiteit toevoegen
     public ResponseEntity<MessageResponse> addTraining(@RequestBody AddTrainingRequest addTrainingRequest,
-             @PathVariable Long trainerId) {
+                                                       @PathVariable Long trainerId) {
         return activityService.addTraining(trainerId, addTrainingRequest);
     }
 
     @PutMapping("{trainerId}")
     // gegevens updaten, dit gaan trainers gebruiken om trainingen te updaten (in tijd/datum)
     public Activity updateUserById(@RequestBody Activity updateTrainerActivity,
-            @PathVariable Long trainerId) {
+                                   @PathVariable Long trainerId) {
         return activityService.updateUserById(trainerId, updateTrainerActivity);
     }
 }

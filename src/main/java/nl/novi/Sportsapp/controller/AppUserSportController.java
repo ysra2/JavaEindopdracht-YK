@@ -1,3 +1,4 @@
+
 package nl.novi.Sportsapp.controller;
 
 import nl.novi.Sportsapp.model.AppUserSport;
@@ -32,14 +33,9 @@ public class AppUserSportController {
         return appUserSportService.saveTrainer(newTrainer);
     }
 
-    // activiteit kan niet bestaan als er geen personaltrainer is
-    // activiteit toevoegen op basis van trainer
-//    @PostMapping("/trainer/{id}/activity")
-//    public AppUserSport addActivityToTrainer(@PathVariable long id, @RequestBody Activity newActivity){
-//        return appUserSportService.addActivityToTrainer(id, newActivity);
-//    }
 
-    @DeleteMapping("/api/app_user_sport/trainer/{id}") //gegevens verwijderen
+
+    @DeleteMapping("/trainer/{id}") //gegevens verwijderen
     public boolean deleteTrainer (@PathVariable long id){
         return appUserSportService.deleteTrainer(id);
     }

@@ -2,10 +2,7 @@ package nl.novi.Sportsapp.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class ActivityType {
@@ -17,7 +14,14 @@ public class ActivityType {
 
     private String activityName;
 
-    public ActivityType(){
+    @ManyToOne
+    private AppUserSport sporters;
+
+    public ActivityType() {
+
+    }
+
+    public ActivityType(String activityName){
 
     }
 
@@ -37,5 +41,14 @@ public class ActivityType {
         this.activityName = activityName;
     }
 
+    public void setActivityType(AppUserSport appUserSport) {
+    }
 
+    public AppUserSport getSporters() {
+        return sporters;
+    }
+
+    public void setSporters(AppUserSport sporters) {
+        this.sporters = sporters;
+    }
 }

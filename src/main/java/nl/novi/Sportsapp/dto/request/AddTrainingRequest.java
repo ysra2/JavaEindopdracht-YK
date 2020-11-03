@@ -1,9 +1,11 @@
 package nl.novi.Sportsapp.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import nl.novi.Sportsapp.model.AppUserSport;
 
 import javax.validation.constraints.NotBlank;
 
+@JsonIgnoreProperties
 public class AddTrainingRequest {
 
     @NotBlank

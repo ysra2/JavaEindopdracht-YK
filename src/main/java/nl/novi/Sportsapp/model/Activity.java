@@ -1,3 +1,4 @@
+
 package nl.novi.Sportsapp.model;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -18,7 +19,6 @@ public class Activity {
     private int time;
     private int date;
 
-
     @ManyToOne
     private ActivityType activityType;
 
@@ -35,6 +35,9 @@ public class Activity {
         this.location = location;
         this.time = time;
         this.date = date;
+    }
+
+    public Activity(String activityName) {
     }
 
     public long getActivityId() {

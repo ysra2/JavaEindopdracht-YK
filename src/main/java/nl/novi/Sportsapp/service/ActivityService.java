@@ -27,13 +27,6 @@ public class ActivityService implements IActivityService {
     @Autowired
     private AppUserSportRepository appUserSportRepository;
 
-//    RoleRepository roleRepository;
-//
-//    @Autowired
-//    public void setRoleRepository(RoleRepository roleRepository) {
-//        this.roleRepository = roleRepository;
-//    }
-
     public List<Activity> getActivities() {
 
         return activityRepository.findAll();
@@ -62,6 +55,7 @@ public class ActivityService implements IActivityService {
                 .badRequest()
                 .body(new MessageResponse("Trainer not found."));
     }
+
 
     @PreAuthorize("hasRole('TRAINER')")
     @Override

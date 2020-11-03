@@ -26,6 +26,7 @@ public class AppUserSport {
     private String email;
     private String password;
 
+
     @ManyToMany //verschillende activitieten hebben ook verschillende trainers
     @JoinTable(name = "sporter_activity",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -38,6 +39,7 @@ public class AppUserSport {
     @OneToMany(mappedBy = "trainer", fetch = FetchType.LAZY)
     //1 trainer kan meerdere soorten sportactiviteiten hebben/toevoegen
     private List<Activity> activitiesAsTrainer;
+
 
     @ManyToMany // user heeft verschillende rollen en en rol heeft verschillende users
     @JoinTable (name = "user_role",

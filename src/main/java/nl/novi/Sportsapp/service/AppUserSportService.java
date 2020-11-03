@@ -1,9 +1,14 @@
 package nl.novi.Sportsapp.service;
 
+import nl.novi.Sportsapp.dto.request.AddActivityTypeToTrainer;
+import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.exception.UserSportNotFoundException;
+import nl.novi.Sportsapp.model.Activity;
 import nl.novi.Sportsapp.model.AppUserSport;
+import nl.novi.Sportsapp.repository.ActivityRepository;
 import nl.novi.Sportsapp.repository.AppUserSportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -18,7 +23,12 @@ public class AppUserSportService implements IAppUserSportService {
 
 
     @Autowired
-    AppUserSportRepository appUserSportRepository;
+    private AppUserSportRepository appUserSportRepository;
+
+
+    @Autowired
+    private ActivityRepository activityRepository;
+
 
     @Override
     public List<AppUserSport> getTrainers() {
@@ -38,21 +48,6 @@ public class AppUserSportService implements IAppUserSportService {
         return appUserSportRepository.save(newTrainer);
     }
 
-//    public AppUserSport addActivityToTrainer(long id,  Activity newActivity){
-//        Optional<Activity> trainer = activityRepository.findById(id);
-//
-//        if (trainer.isPresent()){
-//            AppUserSport trainerFromDb = trainer.get();
-//            List<AppUserSport> currentActivities = trainerFromDb.getUserId();
-//
-//            newActivity.setActivityId(trainerFromDb);
-//
-//            currentActivities.add(newActivity);
-//            trainerFromDb.setUserId((AppUserSport) currentActivities);
-//
-//        }
-//        return null;
-//    }
 
     @PreAuthorize("hasRole('TRAINER')")
     @Override
@@ -69,4 +64,3 @@ public class AppUserSportService implements IAppUserSportService {
 
 
 }
-
