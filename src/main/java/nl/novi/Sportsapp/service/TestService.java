@@ -1,22 +1,22 @@
-package nl.novi.Sportsapp.service;
-
-import nl.novi.Sportsapp.dto.request.AddActivityTypeToTrainer;
-import nl.novi.Sportsapp.dto.response.MessageResponse;
-import nl.novi.Sportsapp.model.Activity;
-import nl.novi.Sportsapp.model.AppUserSport;
-import nl.novi.Sportsapp.repository.ActivityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
-
-@Service
-public class TestService {
-
-    @Autowired
-    private ActivityRepository activityRepository;
+//package nl.novi.Sportsapp.service;
+//
+//import nl.novi.Sportsapp.dto.request.AddActivityTypeToTrainer;
+//import nl.novi.Sportsapp.dto.response.MessageResponse;
+//import nl.novi.Sportsapp.model.Activity;
+//import nl.novi.Sportsapp.model.AppUserSport;
+//import nl.novi.Sportsapp.repository.ActivityRepository;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.stereotype.Service;
+//
+//import java.util.List;
+//import java.util.Optional;
+//
+//@Service
+//public class TestService {
+//
+//    @Autowired
+//    private ActivityRepository activityRepository;
 
 //    public String generatePublicContent() {
 //        return "Public Content.";
@@ -75,31 +75,31 @@ public class TestService {
 //        return null;
 //    }
 
-
-    public ResponseEntity<MessageResponse> addActivityToTrainer(long id, AddActivityTypeToTrainer addActivityTypeToTrainer, AppUserSport newActivity){
-        Activity activity = new Activity(
-                addActivityTypeToTrainer.getActivityName()
-        );
-
-        Optional<Activity> trainer = activityRepository.findById(id);
-
-        if (trainer.isPresent()){
-            Activity trainerFromDb = trainer.get();
-            List<AppUserSport> activities = trainerFromDb.getSporters();
-
-            newActivity.setActivitiesAsTrainer((List<Activity>) trainerFromDb);
-
-            activities.add(newActivity);
-            trainerFromDb.setSporters(activities);
-
-            activityRepository.save(activity);
-
-            return ResponseEntity
-                    .ok()
-                    .body(new MessageResponse("Activity added."));
-        }
-        return ResponseEntity
-                .badRequest()
-                .body(new MessageResponse("No activity added."));
-    }
-}
+//
+//    public ResponseEntity<MessageResponse> addActivityToTrainer(long id, AddActivityTypeToTrainer addActivityTypeToTrainer, AppUserSport newActivity){
+//        Activity activity = new Activity(
+//                addActivityTypeToTrainer.getActivityName()
+//        );
+//
+//        Optional<Activity> trainer = activityRepository.findById(id);
+//
+//        if (trainer.isPresent()){
+//            Activity trainerFromDb = trainer.get();
+//            List<AppUserSport> activities = trainerFromDb.getSporters();
+//
+//            newActivity.setActivitiesAsTrainer((List<Activity>) trainerFromDb);
+//
+//            activities.add(newActivity);
+//            trainerFromDb.setSporters(activities);
+//
+//            activityRepository.save(activity);
+//
+//            return ResponseEntity
+//                    .ok()
+//                    .body(new MessageResponse("Activity added."));
+//        }
+//        return ResponseEntity
+//                .badRequest()
+//                .body(new MessageResponse("No activity added."));
+//    }
+//}

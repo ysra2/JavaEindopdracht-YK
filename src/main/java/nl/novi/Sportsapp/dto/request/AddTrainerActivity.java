@@ -1,16 +1,17 @@
 package nl.novi.Sportsapp.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import nl.novi.Sportsapp.model.Activity;
 import nl.novi.Sportsapp.model.AppUserSport;
+
 import javax.validation.constraints.NotBlank;
 
-@JsonIgnoreProperties
-public class AddActivityTypeToTrainer {
 
-        @NotBlank
-        private String activityName;
+public class AddTrainerActivity extends Activity {
 
-        private AppUserSport trainer;
+    @NotBlank
+    private String activityName;
+
+    private AppUserSport trainer;
 
 
     public String getActivityName() {
@@ -25,8 +26,10 @@ public class AddActivityTypeToTrainer {
             return trainer;
         }
 
-        public void setTrainer(AppUserSport trainer) {
+    public void setTrainer(AppUserSport trainer) {
             this.trainer = trainer;
         }
 
+    public void setActivityId(AppUserSport sportersFromDb) {
+    }
 }

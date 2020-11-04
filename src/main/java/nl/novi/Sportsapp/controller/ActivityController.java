@@ -4,6 +4,7 @@ import nl.novi.Sportsapp.dto.request.AddTrainingRequest;
 import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.model.Activity;
 import nl.novi.Sportsapp.service.ActivityService;
+import nl.novi.Sportsapp.service.ActivityTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,10 @@ public class ActivityController {
     @Autowired //deze wordt gekoppeld met de service klasse
             ActivityService activityService;
 
+
+    @Autowired //deze wordt gekoppeld met de service klasse
+            ActivityTypeService activityTypeService;
+
     @GetMapping //downloaden
     public List<Activity> getActivities() {
         return activityService.getActivities();
@@ -32,14 +37,19 @@ public class ActivityController {
 
     @PostMapping(value = "{trainerId}") // activiteit toevoegen
     public ResponseEntity<MessageResponse> addTraining(@RequestBody AddTrainingRequest addTrainingRequest,
-                                                       @PathVariable Long trainerId) {
+                                                       @PathVariable long trainerId) {
         return activityService.addTraining(trainerId, addTrainingRequest);
     }
 
-    @PutMapping("{trainerId}")
+    @PutMapping("{activityId}")
     // gegevens updaten, dit gaan trainers gebruiken om trainingen te updaten (in tijd/datum)
     public Activity updateUserById(@RequestBody Activity updateTrainerActivity,
-                                   @PathVariable Long trainerId) {
-        return activityService.updateUserById(trainerId, updateTrainerActivity);
+                                   @PathVariable long activityId) {
+        return activityService.updateUserById(activityId, updateTrainerActivity);
+    }
+
+    @DeleteMapping(value = "{activityId}")
+    public boolean deleteActivity(@PathVariable long activityId){
+        return activityService.deleteActivity(activityId);
     }
 }

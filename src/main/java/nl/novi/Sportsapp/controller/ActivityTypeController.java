@@ -1,6 +1,6 @@
 package nl.novi.Sportsapp.controller;
 
-import nl.novi.Sportsapp.dto.request.AddActivityTypeToTrainer;
+import nl.novi.Sportsapp.dto.request.AddTrainerActivity;
 import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.model.ActivityType;
 import nl.novi.Sportsapp.service.ActivityTypeService;
@@ -27,15 +27,15 @@ public class ActivityTypeController {
     @PutMapping("/{trainerId}")//updaten
     public ActivityType updateTrainingById(@PathVariable long trainerId,
                                            @RequestBody ActivityType updateActivityType,
-                                           @RequestBody AddActivityTypeToTrainer addActivityTypeToTrainer) {
-        return activityTypeService.updateTrainingById(trainerId, updateActivityType, addActivityTypeToTrainer);
+                                           @RequestBody AddTrainerActivity addTrainerActivity) {
+        return activityTypeService.updateTrainingById(trainerId, updateActivityType, addTrainerActivity);
     }
 
     // activiteit kan niet bestaan als er geen personaltrainer is
     // activiteit toevoegen op basis van trainer
-    @PutMapping("/trainer/{id}/activity")
-    public ResponseEntity<MessageResponse> addActivityToTrainer(@PathVariable long id,
-                                                                @RequestBody AddActivityTypeToTrainer addActivityTypeToTrainer){
-        return activityTypeService.addActivityToTrainer(id, addActivityTypeToTrainer);
+    @PostMapping(value = "/trainer/{trainerId}/activity")
+    public ResponseEntity<MessageResponse> addActivityToTrainer(@RequestBody AddTrainerActivity addTrainerActivity,
+                                                                @PathVariable long trainerId){
+        return activityTypeService.addActivityToTrainer(trainerId, addTrainerActivity);
     }
 }

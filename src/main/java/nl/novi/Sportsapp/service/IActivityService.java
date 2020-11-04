@@ -6,7 +6,7 @@ import nl.novi.Sportsapp.model.Activity;
 import org.springframework.http.ResponseEntity;
 
 public interface IActivityService {
-    ResponseEntity<MessageResponse> addTraining(Long trainerId, AddTrainingRequest addTrainingRequest);
-    Activity updateUserById( Long trainerId, Activity updateTrainerActivity);
+    ResponseEntity<MessageResponse> addTraining(long trainerId, AddTrainingRequest addTrainingRequest);
+    Activity updateUserById( long trainerId, Activity updateTrainerActivity);
 
 }

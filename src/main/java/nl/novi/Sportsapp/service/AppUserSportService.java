@@ -1,14 +1,10 @@
 package nl.novi.Sportsapp.service;
 
-import nl.novi.Sportsapp.dto.request.AddActivityTypeToTrainer;
-import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.exception.UserSportNotFoundException;
-import nl.novi.Sportsapp.model.Activity;
 import nl.novi.Sportsapp.model.AppUserSport;
 import nl.novi.Sportsapp.repository.ActivityRepository;
 import nl.novi.Sportsapp.repository.AppUserSportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;

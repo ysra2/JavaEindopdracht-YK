@@ -1,6 +1,6 @@
-
 package nl.novi.Sportsapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -19,13 +19,17 @@ public class Activity {
     private int time;
     private int date;
 
+
     @ManyToOne
+    @JsonIgnore
     private ActivityType activityType;
 
-    @ManyToMany(mappedBy = "activities")
+    @JsonIgnore
+    @ManyToMany(mappedBy = "activities", fetch = FetchType.LAZY)
     private List<AppUserSport> sporters;
 
     @ManyToOne
+    @JsonIgnore
     private AppUserSport trainer;
 
     public Activity() {
@@ -35,9 +39,6 @@ public class Activity {
         this.location = location;
         this.time = time;
         this.date = date;
-    }
-
-    public Activity(String activityName) {
     }
 
     public long getActivityId() {

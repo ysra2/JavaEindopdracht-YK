@@ -33,8 +33,6 @@ public class AppUserSportController {
         return appUserSportService.saveTrainer(newTrainer);
     }
 
-
-
     @DeleteMapping("/trainer/{id}") //gegevens verwijderen
     public boolean deleteTrainer (@PathVariable long id){
         return appUserSportService.deleteTrainer(id);

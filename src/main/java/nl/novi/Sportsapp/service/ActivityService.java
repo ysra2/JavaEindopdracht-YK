@@ -1,6 +1,7 @@
 package nl.novi.Sportsapp.service;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.novi.Sportsapp.dto.request.AddTrainingRequest;
 import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.model.Activity;
@@ -27,14 +28,18 @@ public class ActivityService implements IActivityService {
     @Autowired
     private AppUserSportRepository appUserSportRepository;
 
+
+    //Get
     public List<Activity> getActivities() {
 
         return activityRepository.findAll();
     }
 
+    //Post
     @PreAuthorize("hasRole('TRAINER')")
     @Override
-    public ResponseEntity<MessageResponse> addTraining(Long trainerId, AddTrainingRequest addTrainingRequest) {
+    @JsonIgnore
+    public ResponseEntity<MessageResponse> addTraining(long trainerId, AddTrainingRequest addTrainingRequest) {
         Activity activity = new Activity(
                 addTrainingRequest.getLocation(),
                 addTrainingRequest.getTime(),
@@ -56,11 +61,11 @@ public class ActivityService implements IActivityService {
                 .body(new MessageResponse("Trainer not found."));
     }
 
-
+    //Put
     @PreAuthorize("hasRole('TRAINER')")
     @Override
-    public Activity updateUserById(@Valid Long trainerId,  Activity updateTrainerActivity) {
-        return activityRepository.findById(trainerId).map(
+    public Activity updateUserById(@Valid long activityId,  Activity updateTrainerActivity) {
+        return activityRepository.findById(activityId).map(
                 trainer -> {
 //                    trainer.setActivityType(updateTrainerActivity.getActivityType());
                     trainer.setLocation(updateTrainerActivity.getLocation());
@@ -74,4 +79,16 @@ public class ActivityService implements IActivityService {
                 });
     }
 
+
+    //Delete
+    @PreAuthorize("hasRole('TRAINER')")
+    public boolean deleteActivity(long activityId){
+        Optional<AppUserSport> appUserSport = appUserSportRepository.findById(activityId);
+        if (appUserSport.isPresent()){
+            activityRepository.deleteById(activityId);
+            return true;
+        } else{
+            return false;
+        }
+    }
 }
