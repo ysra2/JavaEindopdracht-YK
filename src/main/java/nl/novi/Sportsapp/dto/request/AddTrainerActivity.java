@@ -1,7 +1,7 @@
 package nl.novi.Sportsapp.dto.request;
 
 import nl.novi.Sportsapp.model.Activity;
-import nl.novi.Sportsapp.model.AppUserSport;
+import nl.novi.Sportsapp.model.UserSports;
 
 import javax.validation.constraints.NotBlank;
 
@@ -11,7 +11,7 @@ public class AddTrainerActivity extends Activity {
     @NotBlank
     private String activityName;
 
-    private AppUserSport trainer;
+    private UserSports trainer;
 
 
     public String getActivityName() {
@@ -22,14 +22,14 @@ public class AddTrainerActivity extends Activity {
         this.activityName = activityName;
     }
 
-    public AppUserSport getTrainer() {
+    public UserSports getTrainer() {
             return trainer;
         }
 
-    public void setTrainer(AppUserSport trainer) {
+    public void setTrainer(UserSports trainer) {
             this.trainer = trainer;
         }
 
-    public void setActivityId(AppUserSport sportersFromDb) {
+    public void setActivityId(UserSports sportersFromDb) {
     }
 }

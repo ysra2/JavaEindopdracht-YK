@@ -1,9 +1,9 @@
 package nl.novi.Sportsapp.service;
 
 import nl.novi.Sportsapp.exception.UserSportNotFoundException;
-import nl.novi.Sportsapp.model.AppUserSport;
+import nl.novi.Sportsapp.model.UserSports;
 import nl.novi.Sportsapp.repository.ActivityRepository;
-import nl.novi.Sportsapp.repository.AppUserSportRepository;
+import nl.novi.Sportsapp.repository.UserSportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,11 @@ import java.util.Optional;
 
 @Service
 @Validated
-public class AppUserSportService implements IAppUserSportService {
+public class UserSportsService implements IUserSportsService {
 
 
     @Autowired
-    private AppUserSportRepository appUserSportRepository;
+    private UserSportsRepository userSportsRepository;
 
 
     @Autowired
@@ -27,30 +27,30 @@ public class AppUserSportService implements IAppUserSportService {
 
 
     @Override
-    public List<AppUserSport> getTrainers() {
-        List<AppUserSport> trainerList = appUserSportRepository.findAll();
+    public List<UserSports> getTrainers() {
+        List<UserSports> trainerList = userSportsRepository.findAll();
         return trainerList;
     }
 
     @Override
-    public AppUserSport getTrainer(long userId){
-        return appUserSportRepository.findById(userId).orElseThrow(
+    public UserSports getTrainer(long userId){
+        return userSportsRepository.findById(userId).orElseThrow(
                 () -> new UserSportNotFoundException(userId));
     }
 
-    @PreAuthorize("hasRole('TRAINER')")
-    @Override
-    public AppUserSport saveTrainer(AppUserSport newTrainer) {
-        return appUserSportRepository.save(newTrainer);
-    }
+//    @PreAuthorize("hasRole('TRAINER')")
+//    @Override
+//    public UserSports saveTrainer(UserSports newTrainer) {
+//        return userSportsRepository.save(newTrainer);
+//    }
 
 
-    @PreAuthorize("hasRole('TRAINER')")
+    @PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
     @Override
     public boolean deleteTrainer(long id){
-        Optional<AppUserSport> trainer =appUserSportRepository.findById(id);
+        Optional<UserSports> trainer = userSportsRepository.findById(id);
         if (trainer.isPresent()){
-            appUserSportRepository.deleteById(id);
+            userSportsRepository.deleteById(id);
             return true;
         } else{
             return false;

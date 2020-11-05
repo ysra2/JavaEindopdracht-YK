@@ -4,10 +4,10 @@ import nl.novi.Sportsapp.dto.request.LoginRequest;
 import nl.novi.Sportsapp.dto.request.SignupRequest;
 import nl.novi.Sportsapp.dto.response.JwtResponse;
 import nl.novi.Sportsapp.dto.response.MessageResponse;
-import nl.novi.Sportsapp.model.AppUserSport;
+import nl.novi.Sportsapp.model.UserSports;
 import nl.novi.Sportsapp.model.ERole;
 import nl.novi.Sportsapp.model.Role;
-import nl.novi.Sportsapp.repository.AppUserSportRepository;
+import nl.novi.Sportsapp.repository.UserSportsRepository;
 import nl.novi.Sportsapp.repository.RoleRepository;
 import nl.novi.Sportsapp.service.appuserdetails.AppUserDetailsImpl;
 import nl.novi.Sportsapp.service.security.jwt.JwtUtils;
@@ -34,15 +34,15 @@ public class AuthenticationService {
     private static final String ROLE_NOT_FOUND_ERROR = "Error: Role is not found.";
 
     @Autowired
-    AppUserSportRepository appUserSportRepository;
+    UserSportsRepository userSportsRepository;
     AuthenticationManager authenticationManager;
     PasswordEncoder encoder;
     RoleRepository roleRepository;
     JwtUtils jwtUtils;
 
     @Autowired
-    public void setAppUserRepository(AppUserSportRepository appUserSportRepository) {
-        this.appUserSportRepository = appUserSportRepository;
+    public void setAppUserRepository(UserSportsRepository userSportsRepository) {
+        this.userSportsRepository = userSportsRepository;
     }
 
     @Autowired
@@ -66,20 +66,20 @@ public class AuthenticationService {
     }
 
     public ResponseEntity<MessageResponse> registerUser(@Valid SignupRequest signUpRequest) {
-        if (Boolean.TRUE.equals(appUserSportRepository.existsByUsername(signUpRequest.getUsername()))) {
+        if (Boolean.TRUE.equals(userSportsRepository.existsByUsername(signUpRequest.getUsername()))) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already in use!"));
         }
 
-        if (Boolean.TRUE.equals(appUserSportRepository.existsByEmail(signUpRequest.getEmail()))) {
+        if (Boolean.TRUE.equals(userSportsRepository.existsByEmail(signUpRequest.getEmail()))) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
         // Create new user's account
-        AppUserSport appUserSport = new AppUserSport(
+        UserSports userSports = new UserSports(
                 signUpRequest.getFirstname(),
                 signUpRequest.getLastname(),
                 signUpRequest.getUsername(),
@@ -120,8 +120,8 @@ public class AuthenticationService {
             });
         }
 
-        appUserSport.setRoles(roles);
-        appUserSportRepository.save(appUserSport);
+        userSports.setRoles(roles);
+        userSportsRepository.save(userSports);
 
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

@@ -1,6 +1,6 @@
 package nl.novi.Sportsapp.dto.request;
 
-import nl.novi.Sportsapp.model.AppUserSport;
+import nl.novi.Sportsapp.model.UserSports;
 
 import javax.validation.constraints.NotBlank;
 
@@ -18,7 +18,7 @@ public class AddTrainingRequest {
     private int time;
     private int date;
 
-    private AppUserSport trainer;
+    private UserSports trainer;
 
 
     public String getTrainingactivity() {
@@ -61,11 +61,11 @@ public class AddTrainingRequest {
         this.date = date;
     }
 
-    public AppUserSport getTrainer() {
+    public UserSports getTrainer() {
         return trainer;
     }
 
-    public void setTrainer(AppUserSport trainer) {
+    public void setTrainer(UserSports trainer) {
         this.trainer = trainer;
     }
 }

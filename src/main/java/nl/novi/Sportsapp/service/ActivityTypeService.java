@@ -4,10 +4,10 @@ package nl.novi.Sportsapp.service;
 import nl.novi.Sportsapp.dto.request.AddTrainerActivity;
 import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.model.ActivityType;
-import nl.novi.Sportsapp.model.AppUserSport;
+import nl.novi.Sportsapp.model.UserSports;
 import nl.novi.Sportsapp.repository.ActivityRepository;
 import nl.novi.Sportsapp.repository.ActivityTypeRepository;
-import nl.novi.Sportsapp.repository.AppUserSportRepository;
+import nl.novi.Sportsapp.repository.UserSportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,7 +23,7 @@ public class ActivityTypeService implements IActivityTypeService {
     ActivityTypeRepository activityTypeRepository;
 
     @Autowired
-    AppUserSportRepository appUserSportRepository;
+    UserSportsRepository userSportsRepository;
 
     @Autowired
     ActivityRepository activityRepository;
@@ -54,7 +54,7 @@ public class ActivityTypeService implements IActivityTypeService {
                 addTrainerActivity.getActivityName()
         );
 
-        Optional<AppUserSport> appUserSport = appUserSportRepository.findById(trainerId);
+        Optional<UserSports> appUserSport = userSportsRepository.findById(trainerId);
 
         if(appUserSport.isPresent()) {
             activityType.setActivityTypeId(appUserSport.get());

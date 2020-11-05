@@ -26,11 +26,11 @@ public class Activity {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "activities", fetch = FetchType.LAZY)
-    private List<AppUserSport> sporters;
+    private List<UserSports> sporters;
 
     @ManyToOne
     @JsonIgnore
-    private AppUserSport trainer;
+    private UserSports trainer;
 
     public Activity() {
     }
@@ -82,19 +82,19 @@ public class Activity {
         this.activityType = activityType;
     }
 
-    public List<AppUserSport> getSporters() {
+    public List<UserSports> getSporters() {
         return sporters;
     }
 
-    public void setSporters(List<AppUserSport> sporters) {
+    public void setSporters(List<UserSports> sporters) {
         this.sporters = sporters;
     }
 
-    public AppUserSport getTrainer() {
+    public UserSports getTrainer() {
         return trainer;
     }
 
-    public void setTrainer(AppUserSport trainer) {
+    public void setTrainer(UserSports trainer) {
         this.trainer = trainer;
     }
 

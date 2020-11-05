@@ -35,21 +35,21 @@ public class ActivityController {
         return activityService.getActivities();
     }
 
-    @PostMapping(value = "{trainerId}") // activiteit toevoegen
+    @PostMapping(value = "/{trainerId}") // activiteit toevoegen
     public ResponseEntity<MessageResponse> addTraining(@RequestBody AddTrainingRequest addTrainingRequest,
                                                        @PathVariable long trainerId) {
         return activityService.addTraining(trainerId, addTrainingRequest);
     }
 
-    @PutMapping("{activityId}")
+    @PutMapping("/{activityId}")
     // gegevens updaten, dit gaan trainers gebruiken om trainingen te updaten (in tijd/datum)
     public Activity updateUserById(@RequestBody Activity updateTrainerActivity,
                                    @PathVariable long activityId) {
         return activityService.updateUserById(activityId, updateTrainerActivity);
     }
 
-    @DeleteMapping(value = "{activityId}")
-    public boolean deleteActivity(@PathVariable long activityId){
+    @DeleteMapping(path = "/{activityId}")
+    public ResponseEntity<MessageResponse> deleteActivity(@PathVariable long activityId){
         return activityService.deleteActivity(activityId);
     }
 }

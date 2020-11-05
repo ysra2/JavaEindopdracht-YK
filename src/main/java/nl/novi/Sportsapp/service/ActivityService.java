@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.novi.Sportsapp.dto.request.AddTrainingRequest;
 import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.model.Activity;
-import nl.novi.Sportsapp.model.AppUserSport;
+import nl.novi.Sportsapp.model.UserSports;
 import nl.novi.Sportsapp.repository.ActivityRepository;
-import nl.novi.Sportsapp.repository.AppUserSportRepository;
+import nl.novi.Sportsapp.repository.UserSportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,12 +26,11 @@ public class ActivityService implements IActivityService {
     private ActivityRepository activityRepository;
 
     @Autowired
-    private AppUserSportRepository appUserSportRepository;
+    private UserSportsRepository userSportsRepository;
 
 
     //Get
     public List<Activity> getActivities() {
-
         return activityRepository.findAll();
     }
 
@@ -46,7 +45,7 @@ public class ActivityService implements IActivityService {
                 addTrainingRequest.getDate()
         );
 
-        Optional<AppUserSport> appUserSport = appUserSportRepository.findById(trainerId);
+        Optional<UserSports> appUserSport = userSportsRepository.findById(trainerId);
 
         if(appUserSport.isPresent()) {
             activity.setTrainer(appUserSport.get());
@@ -82,13 +81,10 @@ public class ActivityService implements IActivityService {
 
     //Delete
     @PreAuthorize("hasRole('TRAINER')")
-    public boolean deleteActivity(long activityId){
-        Optional<AppUserSport> appUserSport = appUserSportRepository.findById(activityId);
-        if (appUserSport.isPresent()){
+    public ResponseEntity<MessageResponse> deleteActivity(long activityId){
             activityRepository.deleteById(activityId);
-            return true;
-        } else{
-            return false;
+        return ResponseEntity
+                    .ok()
+                    .body(new MessageResponse("Succesfully deleted!"));
         }
-    }
 }

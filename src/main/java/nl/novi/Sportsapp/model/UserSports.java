@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "app_user_sport")
-public class AppUserSport {
+public class UserSports {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -46,11 +46,11 @@ public class AppUserSport {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    public AppUserSport() {
+    public UserSports() {
 
     }
 
-    public AppUserSport(String firstname, String lastname, String username, String email, String password) {
+    public UserSports(String firstname, String lastname, String username, String email, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;

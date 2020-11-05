@@ -41,9 +41,9 @@ public class ActivityType {
         this.activityName = activityName;
     }
 
-    public void setActivityName(AppUserSport activityName){}
+    public void setActivityName(UserSports activityName){}
 
 
-    public void setActivityTypeId(AppUserSport appUserSport) {
+    public void setActivityTypeId(UserSports userSports) {
     }
 }

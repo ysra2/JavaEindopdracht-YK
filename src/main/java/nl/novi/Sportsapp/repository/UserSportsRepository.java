@@ -1,12 +1,12 @@
 package nl.novi.Sportsapp.repository;
 
-import nl.novi.Sportsapp.model.AppUserSport;
+import nl.novi.Sportsapp.model.UserSports;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface AppUserSportRepository extends JpaRepository<AppUserSport, Long> {
-    Optional<AppUserSport> findByEmail(String email);
+public interface UserSportsRepository extends JpaRepository<UserSports, Long> {
+    Optional<UserSports> findByEmail(String email);
     Boolean existsByEmail(String email);
     Boolean existsByUsername(String username);
 }
