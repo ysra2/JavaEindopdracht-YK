@@ -4,6 +4,7 @@ package nl.novi.Sportsapp.service;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import nl.novi.Sportsapp.dto.request.AddTrainingRequest;
 import nl.novi.Sportsapp.dto.response.MessageResponse;
+import nl.novi.Sportsapp.exception.UserSportNotFoundException;
 import nl.novi.Sportsapp.model.Activity;
 import nl.novi.Sportsapp.model.UserSports;
 import nl.novi.Sportsapp.repository.ActivityRepository;
@@ -28,10 +29,15 @@ public class ActivityService implements IActivityService {
     @Autowired
     private UserSportsRepository userSportsRepository;
 
-
     //Get
-    public List<Activity> getActivities() {
-        return activityRepository.findAll();
+    public List<Activity> getActivitiesByActivityName(String activityName) {
+        List<Activity> activities = activityRepository.getActivitiesByActivityName(activityName);
+        if(activities.isEmpty())
+            return (List<Activity>) ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Activity not found."));
+
+        return activities;
     }
 
     //Post
@@ -40,6 +46,7 @@ public class ActivityService implements IActivityService {
     @JsonIgnore
     public ResponseEntity<MessageResponse> addTraining(long trainerId, AddTrainingRequest addTrainingRequest) {
         Activity activity = new Activity(
+                addTrainingRequest.getActivityName(),
                 addTrainingRequest.getLocation(),
                 addTrainingRequest.getTime(),
                 addTrainingRequest.getDate()
@@ -47,44 +54,58 @@ public class ActivityService implements IActivityService {
 
         Optional<UserSports> appUserSport = userSportsRepository.findById(trainerId);
 
-        if(appUserSport.isPresent()) {
+        if (appUserSport.isPresent()) {
             activity.setTrainer(appUserSport.get());
             activityRepository.save(activity);
 
+            Optional<UserSports> trainer = userSportsRepository.findById(trainerId);
+            if (trainer.isPresent()) {
+                UserSports trainerFromDb = trainer.get();
+                List<Activity> activities = trainerFromDb.getActivities();
+
+                activities.add(activity);
+                trainerFromDb.setActivities(activities);
+
+                activity.setTrainer(trainer.get());
+                activityRepository.save(activity);
+            }
             return ResponseEntity
                     .ok()
                     .body(new MessageResponse("Activity added."));
         }
-        return ResponseEntity
-                .badRequest()
-                .body(new MessageResponse("Trainer not found."));
-    }
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Trainer not found."));
 
-    //Put
-    @PreAuthorize("hasRole('TRAINER')")
-    @Override
-    public Activity updateUserById(@Valid long activityId,  Activity updateTrainerActivity) {
-        return activityRepository.findById(activityId).map(
-                trainer -> {
-//                    trainer.setActivityType(updateTrainerActivity.getActivityType());
-                    trainer.setLocation(updateTrainerActivity.getLocation());
-                    trainer.setTime(updateTrainerActivity.getTime());
-                    trainer.setDate(updateTrainerActivity.getDate());
-                    return activityRepository.save(trainer);
-                })
-                // Kan de user niet vinden in database
-                .orElseGet(() -> {
-                    return activityRepository.save(updateTrainerActivity);
-                });
     }
 
 
-    //Delete
-    @PreAuthorize("hasRole('TRAINER')")
-    public ResponseEntity<MessageResponse> deleteActivity(long activityId){
+
+        //Put
+        @PreAuthorize("hasRole('TRAINER')")
+        @Override
+        public Activity updateUserById ( @Valid long activityId, Activity updateTrainerActivity){
+            return activityRepository.findById(activityId).map(
+                    trainer -> {
+                        trainer.setLocation(updateTrainerActivity.getLocation());
+                        trainer.setTime(updateTrainerActivity.getTime());
+                        trainer.setDate(updateTrainerActivity.getDate());
+                        return activityRepository.save(trainer);
+                    })
+                    // Kan de user niet vinden in database
+                    .orElseThrow( () -> new UserSportNotFoundException("Activity not found"));
+
+        }
+
+
+        //Delete
+        @PreAuthorize("hasRole('TRAINER')")
+        public ResponseEntity<MessageResponse> deleteActivity ( long activityId) {
             activityRepository.deleteById(activityId);
-        return ResponseEntity
+            return ResponseEntity
                     .ok()
                     .body(new MessageResponse("Succesfully deleted!"));
         }
 }
+
+

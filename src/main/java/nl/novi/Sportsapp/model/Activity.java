@@ -14,15 +14,12 @@ public class Activity {
     @GenericGenerator(name = "native", strategy = "native")
     private long activityId;
 
+    private String activityName;
     private String location;
 
     private int time;
     private int date;
 
-
-    @ManyToOne
-    @JsonIgnore
-    private ActivityType activityType;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "activities", fetch = FetchType.LAZY)
@@ -35,11 +32,13 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(String location, int time, int date) {
+    public Activity(String activityName, String location, int time, int date) {
+        this.activityName=activityName;
         this.location = location;
         this.time = time;
         this.date = date;
     }
+
 
     public long getActivityId() {
         return activityId;
@@ -48,6 +47,14 @@ public class Activity {
 
     public void setActivityId(long activityId) {
         this.activityId = activityId;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
     }
 
     public String getLocation() {
@@ -74,13 +81,6 @@ public class Activity {
         this.date = date;
     }
 
-    public ActivityType getActivityType() {
-        return activityType;
-    }
-
-    public void setActivityType(ActivityType activityType) {
-        this.activityType = activityType;
-    }
 
     public List<UserSports> getSporters() {
         return sporters;
@@ -97,5 +97,8 @@ public class Activity {
     public void setTrainer(UserSports trainer) {
         this.trainer = trainer;
     }
+
+
+
 
 }

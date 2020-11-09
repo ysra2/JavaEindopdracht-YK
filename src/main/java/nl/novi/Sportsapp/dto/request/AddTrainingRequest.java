@@ -12,6 +12,7 @@ public class AddTrainingRequest {
     private String nameTrainer;
 
     @NotBlank
+    private String activityName;
     private String location;
 
     @NotBlank
@@ -35,6 +36,14 @@ public class AddTrainingRequest {
 
     public void setNameTrainer(String nameTrainer) {
         this.nameTrainer = nameTrainer;
+    }
+
+    public String getActivityName() {
+        return activityName;
+    }
+
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
     }
 
     public String getLocation() {

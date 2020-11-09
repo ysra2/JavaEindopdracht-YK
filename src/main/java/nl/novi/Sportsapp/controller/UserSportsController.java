@@ -1,9 +1,11 @@
 
 package nl.novi.Sportsapp.controller;
 
+import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.model.UserSports;
 import nl.novi.Sportsapp.service.UserSportsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,13 +30,15 @@ public class UserSportsController {
         return userSportsService.getTrainer(userId);
     }
 
-//    @PostMapping("/trainer/save")//localhost:8080/api/app_user_sport/trainer // gegevens trainer plaatsen
-//    public UserSports saveTrainer(@RequestBody UserSports newTrainer){
-//        return userSportsService.saveTrainer(newTrainer);
-//    }
+    @PutMapping("/{trainerId}")
+    // gegevens updaten, dit gaan trainers gebruiken om trainingen te updaten (in tijd/datum)
+    public UserSports updateUserById(@RequestBody UserSports updateTrainer,
+                                   @PathVariable long trainerId) {
+        return userSportsService.updateUserById(trainerId, updateTrainer);
+    }
 
     @DeleteMapping("/trainer/{id}") //gegevens verwijderen
-    public boolean deleteTrainer (@PathVariable long id){
+    public ResponseEntity<MessageResponse> deleteTrainer (@PathVariable long id){
         return userSportsService.deleteTrainer(id);
     }
 

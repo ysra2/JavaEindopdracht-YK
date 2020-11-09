@@ -58,6 +58,8 @@ public class UserSports {
         this.password = password;
     }
 
+
+
     public long getUserId() {
         return userId;
     }
@@ -125,4 +127,6 @@ public class UserSports {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+
 }

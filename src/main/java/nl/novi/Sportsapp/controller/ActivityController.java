@@ -4,7 +4,6 @@ import nl.novi.Sportsapp.dto.request.AddTrainingRequest;
 import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.model.Activity;
 import nl.novi.Sportsapp.service.ActivityService;
-import nl.novi.Sportsapp.service.ActivityTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +26,9 @@ public class ActivityController {
             ActivityService activityService;
 
 
-    @Autowired //deze wordt gekoppeld met de service klasse
-            ActivityTypeService activityTypeService;
-
-    @GetMapping //downloaden
-    public List<Activity> getActivities() {
-        return activityService.getActivities();
+    @GetMapping("/{activityName}") //downloaden
+    public List<Activity> getActivitiesByActivityName(@PathVariable String activityName) {
+        return activityService.getActivitiesByActivityName(activityName);
     }
 
     @PostMapping(value = "/{trainerId}") // activiteit toevoegen

@@ -8,7 +8,7 @@ import java.util.Set;
 public class SignupRequest {
 
     @NotBlank
-    @Size(min=8, max=30)
+    @Size(min=4, max=30)
     private String firstname;
     private String lastname;
     private String username;
