@@ -84,7 +84,7 @@ public class ActivityService implements IActivityService {
         //Put
         @PreAuthorize("hasRole('TRAINER')")
         @Override
-        public Activity updateUserById ( @Valid long activityId, Activity updateTrainerActivity){
+        public Activity updateUserById (@Valid long activityId, Activity updateTrainerActivity){
             return activityRepository.findById(activityId).map(
                     trainer -> {
                         trainer.setLocation(updateTrainerActivity.getLocation());
@@ -100,7 +100,7 @@ public class ActivityService implements IActivityService {
 
         //Delete
         @PreAuthorize("hasRole('TRAINER')")
-        public ResponseEntity<MessageResponse> deleteActivity ( long activityId) {
+        public ResponseEntity<MessageResponse> deleteActivity (long activityId) {
             activityRepository.deleteById(activityId);
             return ResponseEntity
                     .ok()

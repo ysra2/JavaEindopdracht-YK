@@ -2,7 +2,6 @@ package nl.novi.Sportsapp.service;
 
 import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.exception.UserSportNotFoundException;
-import nl.novi.Sportsapp.model.Activity;
 import nl.novi.Sportsapp.model.UserSports;
 import nl.novi.Sportsapp.repository.ActivityRepository;
 import nl.novi.Sportsapp.repository.UserSportsRepository;
