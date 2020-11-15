@@ -2,9 +2,7 @@ package nl.novi.Sportsapp.service;
 
 import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.exception.UserSportNotFoundException;
-import nl.novi.Sportsapp.model.Activity;
 import nl.novi.Sportsapp.model.UserSports;
-import nl.novi.Sportsapp.repository.ActivityRepository;
 import nl.novi.Sportsapp.repository.UserSportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +22,6 @@ public class UserSportsService implements IUserSportsService {
 
     @Autowired
     private UserSportsRepository userSportsRepository;
-
-
-    @Autowired
-    private ActivityRepository activityRepository;
 
 
     @Override

@@ -10,14 +10,17 @@ public class AddTrainerActivity extends Activity {
 
     @NotBlank
     private String activityName;
+
+    @NotBlank
+    private String trainerName;
+
+    @NotBlank
     private String location;
 
     @NotBlank
-    private int time;
-    private int date;
+    private String dateTime;
 
     private UserSports trainer;
-
 
 
     public String getActivityName() {
@@ -27,6 +30,14 @@ public class AddTrainerActivity extends Activity {
 
     public void setActivityName(String activityName) {
         this.activityName = activityName;
+    }
+
+    public String getTrainerName() {
+        return trainerName;
+    }
+
+    public void setTrainerName(String trainerName) {
+        this.trainerName = trainerName;
     }
 
 
@@ -39,26 +50,13 @@ public class AddTrainerActivity extends Activity {
         this.location = location;
     }
 
-
-    public int getTime() {
-        return time;
+    public String getDateTime() {
+        return dateTime;
     }
 
-
-    public void setTime(int time) {
-        this.time = time;
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
-
-
-    public int getDate() {
-        return date;
-    }
-
-
-    public void setDate(int date) {
-        this.date = date;
-    }
-
 
     public UserSports getTrainer() {
         return trainer;

@@ -8,35 +8,19 @@ import javax.validation.constraints.NotBlank;
 public class AddTrainingRequest {
 
     @NotBlank
-    private String trainingactivity;
-    private String nameTrainer;
+    private String activityName;
 
     @NotBlank
-    private String activityName;
+    private String trainerName;
+
+    @NotBlank
     private String location;
 
     @NotBlank
-    private int time;
-    private int date;
+    private String dateTime;
 
     private UserSports trainer;
 
-
-    public String getTrainingactivity() {
-        return trainingactivity;
-    }
-
-    public void setTrainingactivity(String trainingactivity) {
-        this.trainingactivity = trainingactivity;
-    }
-
-    public String getNameTrainer() {
-        return nameTrainer;
-    }
-
-    public void setNameTrainer(String nameTrainer) {
-        this.nameTrainer = nameTrainer;
-    }
 
     public String getActivityName() {
         return activityName;
@@ -44,6 +28,14 @@ public class AddTrainingRequest {
 
     public void setActivityName(String activityName) {
         this.activityName = activityName;
+    }
+
+    public String getTrainerName() {
+        return trainerName;
+    }
+
+    public void setTrainerName(String trainerName) {
+        this.trainerName = trainerName;
     }
 
     public String getLocation() {
@@ -54,20 +46,12 @@ public class AddTrainingRequest {
         this.location = location;
     }
 
-    public int getTime() {
-        return time;
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public void setTime(int time) {
-        this.time = time;
-    }
-
-    public int getDate() {
-        return date;
-    }
-
-    public void setDate(int date) {
-        this.date = date;
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     public UserSports getTrainer() {

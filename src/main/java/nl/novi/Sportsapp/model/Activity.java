@@ -15,10 +15,9 @@ public class Activity {
     private long activityId;
 
     private String activityName;
+    private String trainerName;
     private String location;
-
-    private int time;
-    private int date;
+    private String dateTime;
 
 
     @JsonIgnore
@@ -32,13 +31,12 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(String activityName, String location, int time, int date) {
-        this.activityName=activityName;
+    public Activity(String activityName, String trainerName, String location, String dateTime) {
+        this.activityName = activityName;
+        this.trainerName = trainerName;
         this.location = location;
-        this.time = time;
-        this.date = date;
+        this.dateTime = dateTime;
     }
-
 
     public long getActivityId() {
         return activityId;
@@ -57,6 +55,14 @@ public class Activity {
         this.activityName = activityName;
     }
 
+    public String getTrainerName() {
+        return trainerName;
+    }
+
+    public void setTrainerName(String trainerName) {
+        this.trainerName = trainerName;
+    }
+
     public String getLocation() {
         return location;
     }
@@ -65,22 +71,13 @@ public class Activity {
         this.location = location;
     }
 
-    public int getTime() {
-        return time;
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
-
-    public int getDate() {
-        return date;
-    }
-
-    public void setDate(int date) {
-        this.date = date;
-    }
-
 
     public List<UserSports> getSporters() {
         return sporters;

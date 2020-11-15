@@ -22,7 +22,6 @@ import java.util.Optional;
 @Service
 public class ActivityService implements IActivityService {
 
-    //    private static final String ROLE_NOT_FOUND_ERROR = "Error: Role is not found.";
     @Autowired
     private ActivityRepository activityRepository;
 
@@ -47,9 +46,9 @@ public class ActivityService implements IActivityService {
     public ResponseEntity<MessageResponse> addTraining(long trainerId, AddTrainingRequest addTrainingRequest) {
         Activity activity = new Activity(
                 addTrainingRequest.getActivityName(),
+                addTrainingRequest.getTrainerName(),
                 addTrainingRequest.getLocation(),
-                addTrainingRequest.getTime(),
-                addTrainingRequest.getDate()
+                addTrainingRequest.getDateTime()
         );
 
         Optional<UserSports> appUserSport = userSportsRepository.findById(trainerId);
@@ -88,8 +87,7 @@ public class ActivityService implements IActivityService {
             return activityRepository.findById(activityId).map(
                     trainer -> {
                         trainer.setLocation(updateTrainerActivity.getLocation());
-                        trainer.setTime(updateTrainerActivity.getTime());
-                        trainer.setDate(updateTrainerActivity.getDate());
+                        trainer.setDateTime(updateTrainerActivity.getDateTime());
                         return activityRepository.save(trainer);
                     })
                     // Kan de user niet vinden in database

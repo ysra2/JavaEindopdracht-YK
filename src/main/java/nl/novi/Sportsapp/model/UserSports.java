@@ -58,8 +58,6 @@ public class UserSports {
         this.password = password;
     }
 
-
-
     public long getUserId() {
         return userId;
     }
