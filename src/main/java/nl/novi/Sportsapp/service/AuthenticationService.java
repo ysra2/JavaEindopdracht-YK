@@ -97,12 +97,6 @@ public class AuthenticationService {
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException(ROLE_NOT_FOUND_ERROR));
-                        roles.add(adminRole);
-
-                        break;
                     case "sporter":
                         Role sporterRole = roleRepository.findByName(ERole.ROLE_SPORTER)
                                 .orElseThrow(() -> new RuntimeException(ROLE_NOT_FOUND_ERROR));

@@ -40,6 +40,11 @@ public class ActivityService implements IActivityService {
         return activities;
     }
 
+
+
+
+
+
     //Post
     @PreAuthorize("hasRole('TRAINER')")
     @Override
@@ -101,7 +106,7 @@ public class ActivityService implements IActivityService {
         //Delete
         @PreAuthorize("hasRole('TRAINER')")
         public ResponseEntity<MessageResponse> deleteActivity ( long activityId) {
-            activityRepository.deleteById(activityId);
+            userSportsRepository.deleteById(activityId);
             return ResponseEntity
                     .ok()
                     .body(new MessageResponse("Succesfully deleted!"));

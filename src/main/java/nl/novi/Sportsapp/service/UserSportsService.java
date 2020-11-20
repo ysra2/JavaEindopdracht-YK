@@ -2,9 +2,7 @@ package nl.novi.Sportsapp.service;
 
 import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.exception.UserSportNotFoundException;
-import nl.novi.Sportsapp.model.Activity;
 import nl.novi.Sportsapp.model.UserSports;
-import nl.novi.Sportsapp.repository.ActivityRepository;
 import nl.novi.Sportsapp.repository.UserSportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +12,6 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -26,15 +23,30 @@ public class UserSportsService implements IUserSportsService {
     private UserSportsRepository userSportsRepository;
 
 
-    @Autowired
-    private ActivityRepository activityRepository;
-
-
+    @PreAuthorize("hasRole('TRAINER')")
     @Override
     public List<UserSports> getTrainers() {
         List<UserSports> trainerList = userSportsRepository.findAll();
+        if(trainerList.isEmpty())
+            return (List<UserSports>) ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Activity not found."));
+
         return trainerList;
     }
+//
+//    @PreAuthorize("hasRole('SPORTER') or haseRole('TRAINER')")
+//    @Override
+//    public List<UserSports> getNameTrainer(String firstName) {
+//        List<UserSports> trainerList = userSportsRepository.getNameTrainer(firstName);
+//        if(trainerList.isEmpty())
+//            return (List<UserSports>) ResponseEntity
+//                    .badRequest()
+//                    .body(new MessageResponse("Activity not found."));
+//
+//        return trainerList;
+//    }
+
 
     @Override
     public UserSports getTrainer(long userId){
@@ -60,21 +72,21 @@ public class UserSportsService implements IUserSportsService {
 
     }
 
-    @PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
-    @Override
-    public ResponseEntity<MessageResponse> deleteTrainer(long id){
-        Optional<UserSports> trainer = userSportsRepository.findById(id);
-        if (trainer.isPresent()) {
-            userSportsRepository.deleteById(id);
-            return ResponseEntity
-                    .ok()
-                    .body(new MessageResponse("Succesfully deleted!"));
-        }
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Succesfully deleted!"));
-
-
-    }
+//    @PreAuthorize("hasRole('TRAINER')")
+//    @Override
+//    public ResponseEntity<MessageResponse> deleteTrainer(long id){
+//        Optional<UserSports> trainer = userSportsRepository.findById(id);
+//        if (trainer.isPresent()) {
+//            userSportsRepository.deleteById(id);
+//            return ResponseEntity
+//                    .ok()
+//                    .body(new MessageResponse("Succesfully deleted!"));
+//        }
+//            return ResponseEntity
+//                    .badRequest()
+//                    .body(new MessageResponse("Succesfully deleted!"));
+//
+//
+//    }
 
 }

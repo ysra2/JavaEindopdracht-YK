@@ -1,11 +1,9 @@
 
 package nl.novi.Sportsapp.controller;
 
-import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.model.UserSports;
 import nl.novi.Sportsapp.service.UserSportsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +22,10 @@ public class UserSportsController {
         return userSportsService.getTrainers();
     }
 
+//    @GetMapping("/sporter") //gegevens ophalen
+//    public List<UserSports> getNameTrainer(@PathVariable String firstName) {
+//        return userSportsService.getNameTrainer(firstName);
+//    }
 
     @GetMapping("/trainer/{userId}") // gegevens ophalen per Id trainer
     public UserSports getTrainer(@PathVariable long userId){
@@ -37,10 +39,10 @@ public class UserSportsController {
         return userSportsService.updateUserById(trainerId, updateTrainer);
     }
 
-    @DeleteMapping("/trainer/{id}") //gegevens verwijderen
-    public ResponseEntity<MessageResponse> deleteTrainer (@PathVariable long id){
-        return userSportsService.deleteTrainer(id);
-    }
+//    @DeleteMapping("/trainer/{id}") //gegevens verwijderen
+//    public ResponseEntity<MessageResponse> deleteTrainer (@PathVariable long id){
+//        return userSportsService.deleteTrainer(id);
+//    }
 
 
 }
