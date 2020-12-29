@@ -13,6 +13,7 @@ public interface IUserSportsService {
    UserSports getTrainer(long id);
    UserSports updateUserById (@Valid long trainerId, UserSports updateTrainer);
    ResponseEntity<MessageResponse> deleteTrainer(long id);
+   ResponseEntity<MessageResponse> deleteSporter(long id);
 //   AppUserSport saveTrainer(AppUserSport newTrainer, AddActivityTypeToTrainer addActivityTypeToTrainer);
 
 }

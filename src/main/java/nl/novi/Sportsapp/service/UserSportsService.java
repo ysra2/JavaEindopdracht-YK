@@ -2,7 +2,6 @@ package nl.novi.Sportsapp.service;
 
 import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.exception.UserSportNotFoundException;
-import nl.novi.Sportsapp.model.Activity;
 import nl.novi.Sportsapp.model.UserSports;
 import nl.novi.Sportsapp.repository.ActivityRepository;
 import nl.novi.Sportsapp.repository.UserSportsRepository;
@@ -60,7 +59,8 @@ public class UserSportsService implements IUserSportsService {
 
     }
 
-    @PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
+    //Delete users
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public ResponseEntity<MessageResponse> deleteTrainer(long id){
         Optional<UserSports> trainer = userSportsRepository.findById(id);
@@ -72,9 +72,25 @@ public class UserSportsService implements IUserSportsService {
         }
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Succesfully deleted!"));
+                    .body(new MessageResponse("Unsuccesfully deleted!"));
 
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @Override
+    public ResponseEntity<MessageResponse> deleteSporter(long id){
+        Optional<UserSports> sporter = userSportsRepository.findById(id);
+        if (sporter.isPresent()) {
+            userSportsRepository.deleteById(id);
+            return ResponseEntity
+                    .ok()
+                    .body(new MessageResponse("Succesfully deleted!"));
+        }
+        return ResponseEntity
+                .badRequest()
+                .body(new MessageResponse("Unsuccesfully deleted!"));
+
+
+    }
 }

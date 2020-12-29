@@ -99,13 +99,23 @@ public class ActivityService implements IActivityService {
 
 
         //Delete
-        @PreAuthorize("hasRole('TRAINER')")
+        @PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
         public ResponseEntity<MessageResponse> deleteActivity ( long activityId) {
+        Optional<Activity> activity = activityRepository.findById(activityId);
+            if (activity.isPresent()) {
             activityRepository.deleteById(activityId);
             return ResponseEntity
                     .ok()
                     .body(new MessageResponse("Succesfully deleted!"));
         }
+
+        return ResponseEntity
+                .badRequest()
+                .body(new MessageResponse("Unsuccesfully deleted!"));
+
+
+    }
+
 }
 
 

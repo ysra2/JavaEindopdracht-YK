@@ -42,5 +42,9 @@ public class UserSportsController {
         return userSportsService.deleteTrainer(id);
     }
 
+    @DeleteMapping("/sporter/{id}") //gegevens verwijderen
+    public ResponseEntity<MessageResponse> deleteSporter (@PathVariable long id){
+        return userSportsService.deleteSporter(id);
+    }
 
 }
