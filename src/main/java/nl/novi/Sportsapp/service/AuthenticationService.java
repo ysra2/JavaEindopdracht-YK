@@ -4,11 +4,11 @@ import nl.novi.Sportsapp.dto.request.LoginRequest;
 import nl.novi.Sportsapp.dto.request.SignupRequest;
 import nl.novi.Sportsapp.dto.response.JwtResponse;
 import nl.novi.Sportsapp.dto.response.MessageResponse;
-import nl.novi.Sportsapp.model.UserSports;
 import nl.novi.Sportsapp.model.ERole;
 import nl.novi.Sportsapp.model.Role;
-import nl.novi.Sportsapp.repository.UserSportsRepository;
+import nl.novi.Sportsapp.model.UserSports;
 import nl.novi.Sportsapp.repository.RoleRepository;
+import nl.novi.Sportsapp.repository.UserSportsRepository;
 import nl.novi.Sportsapp.service.appuserdetails.AppUserDetailsImpl;
 import nl.novi.Sportsapp.service.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,8 +80,8 @@ public class AuthenticationService {
 
         // Create new user's account
         UserSports userSports = new UserSports(
-                signUpRequest.getFirstname(),
-                signUpRequest.getLastname(),
+                signUpRequest.getFirstName(),
+                signUpRequest.getLastName(),
                 signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));

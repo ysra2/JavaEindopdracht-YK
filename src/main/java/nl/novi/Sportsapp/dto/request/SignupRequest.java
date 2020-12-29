@@ -9,8 +9,8 @@ public class SignupRequest {
 
     @NotBlank
     @Size(min=4, max=30)
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String username;
 
     @NotBlank
@@ -24,20 +24,20 @@ public class SignupRequest {
 
     private Set<String> role;
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstname(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastname) {
+        this.lastName = lastname;
     }
 
     public String getUsername() {

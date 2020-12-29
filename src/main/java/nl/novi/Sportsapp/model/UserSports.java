@@ -19,8 +19,8 @@ public class UserSports {
     @Column(columnDefinition = "serial")
     private long userId;
     //private zorgt ervoor dat het alleen toegankelijk is voor de desbetreffende klasse
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
 
     private String username;
     private String email;
@@ -50,9 +50,9 @@ public class UserSports {
 
     }
 
-    public UserSports(String firstname, String lastname, String username, String email, String password) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public UserSports(String firstName, String lastName, String username, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -69,19 +69,19 @@ public class UserSports {
     }
 
     public String getFirstname() {
-        return firstname;
+        return firstName;
     }
 
     public void setFirstname(String firstname) {
-        this.firstname = firstname;
+        this.firstName = firstname;
     }
 
     public String getLastname() {
-        return lastname;
+        return lastName;
     }
 
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.lastName = lastname;
     }
 
     public String getUsername() {
