@@ -17,8 +17,8 @@ public class Activity {
     private String activityName;
     private String location;
 
-    private int time;
-    private int date;
+    private String time;
+    private String date;
 
 
     @JsonIgnore
@@ -32,7 +32,7 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(String activityName, String location, int time, int date) {
+    public Activity(String activityName, String location, String time, String date) {
         this.activityName=activityName;
         this.location = location;
         this.time = time;
@@ -65,22 +65,21 @@ public class Activity {
         this.location = location;
     }
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(String date) {
         this.date = date;
     }
-
 
     public List<UserSports> getSporters() {
         return sporters;

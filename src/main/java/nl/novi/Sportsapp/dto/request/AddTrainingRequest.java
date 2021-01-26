@@ -9,15 +9,18 @@ public class AddTrainingRequest {
 
     @NotBlank
     private String trainingactivity;
+    @NotBlank
     private String nameTrainer;
 
     @NotBlank
     private String activityName;
+    @NotBlank
     private String location;
 
     @NotBlank
-    private int time;
-    private int date;
+    private String time;
+    @NotBlank
+    private String date;
 
     private UserSports trainer;
 
@@ -54,19 +57,19 @@ public class AddTrainingRequest {
         this.location = location;
     }
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
