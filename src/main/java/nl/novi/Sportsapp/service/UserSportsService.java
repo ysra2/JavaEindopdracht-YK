@@ -43,7 +43,7 @@ public class UserSportsService implements IUserSportsService {
 
 
     //Put
-    @PreAuthorize("hasRole('TRAINER')")
+    @PreAuthorize("hasRole('ROLE_TRAINER')")
     @Override
     public UserSports updateUserById (@Valid long trainerId, UserSports updateTrainer){
         return userSportsRepository.findById(trainerId).map(
@@ -60,7 +60,7 @@ public class UserSportsService implements IUserSportsService {
     }
 
     //Delete users
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     public ResponseEntity<MessageResponse> deleteTrainer(long id){
         Optional<UserSports> trainer = userSportsRepository.findById(id);
@@ -77,7 +77,7 @@ public class UserSportsService implements IUserSportsService {
 
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     public ResponseEntity<MessageResponse> deleteSporter(long id){
         Optional<UserSports> sporter = userSportsRepository.findById(id);

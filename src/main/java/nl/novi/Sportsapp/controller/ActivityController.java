@@ -16,7 +16,7 @@ import java.util.List;
 // alleen gevens die het ontvangen en doorsturen mogelijk maakt
 //geldt voor de klasse als de methode
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = { "*", "http://localhost:8080"}, maxAge = 3600)
 @RestController //spring weet dan dat we met een restcontroller te maken hebben
 @RequestMapping(value = "/api/activity")
 public class ActivityController {
@@ -31,6 +31,7 @@ public class ActivityController {
         return activityService.getActivitiesByActivityName(activityName);
     }
 
+    @CrossOrigin
     @PostMapping(value = "/{trainerId}") // activiteit toevoegen
     public ResponseEntity<MessageResponse> addTraining(@RequestBody AddTrainingRequest addTrainingRequest,
                                                        @PathVariable long trainerId) {

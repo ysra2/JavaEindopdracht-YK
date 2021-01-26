@@ -41,9 +41,9 @@ public class ActivityService implements IActivityService {
     }
 
     //Post
-    @PreAuthorize("hasRole('TRAINER')")
+    @PreAuthorize("hasRole('ROLE_TRAINER')")
     @Override
-    @JsonIgnore
+   @JsonIgnore
     public ResponseEntity<MessageResponse> addTraining(long trainerId, AddTrainingRequest addTrainingRequest) {
         Activity activity = new Activity(
                 addTrainingRequest.getActivityName(),
@@ -82,7 +82,7 @@ public class ActivityService implements IActivityService {
 
 
         //Put
-        @PreAuthorize("hasRole('TRAINER')")
+        @PreAuthorize("hasRole('ROLE_TRAINER')")
         @Override
         public Activity updateUserById ( @Valid long activityId, Activity updateTrainerActivity){
             return activityRepository.findById(activityId).map(
@@ -99,7 +99,7 @@ public class ActivityService implements IActivityService {
 
 
         //Delete
-        @PreAuthorize("hasRole('TRAINER') or hasRole('ADMIN')")
+        @PreAuthorize("hasRole('ROLE_TRAINER') or hasRole('ROLE_ADMIN')")
         public ResponseEntity<MessageResponse> deleteActivity ( long activityId) {
         Optional<Activity> activity = activityRepository.findById(activityId);
             if (activity.isPresent()) {

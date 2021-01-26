@@ -29,7 +29,7 @@ public class DataBaseFiller implements CommandLineRunner {
         admin.setLastName("admin");
         admin.setUsername("admin");
         admin.setEmail("admin@admin.com");
-        admin.setPassword("adminadmin");
+        admin.setPassword("12345678");
         admin.setRole(roles);
         authenticationService.registerUser(admin);
     }

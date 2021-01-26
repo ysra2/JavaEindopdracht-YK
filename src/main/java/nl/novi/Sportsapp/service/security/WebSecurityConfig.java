@@ -60,7 +60,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+                .authorizeRequests()
+                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/user_sports/**")
+                .access("hasRole('ROLE_TRAINER') or hasRole('ROLE_SPORTER') or hasRole('ROLE_ADMIN')")
+                .antMatchers("/api/activity/**")
+                .access("hasRole('ROLE_TRAINER') or hasRole('ROLE_SPORTER') or hasRole('ROLE_ADMIN')")
                 .antMatchers("/api/test/**").permitAll()
                 .anyRequest().authenticated();
 
