@@ -29,24 +29,31 @@ public class ActivityService implements IActivityService {
     @Autowired
     private UserSportsRepository userSportsRepository;
 
-    //Get
+       //Get all activities
+    public List<Activity> getActivity() {
+        return activityRepository.getActivity();
+    }
+
+
+    //Get{id}
     public List<Activity> getActivitiesByActivityName(String activityName) {
         List<Activity> activities = activityRepository.getActivitiesByActivityName(activityName);
-        if(activities.isEmpty())
-            return (List<Activity>) ResponseEntity
+        if (activities.isEmpty()) {
+            ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Activity not found."));
-
-        return activities;
+        }
+            return activities;
     }
 
     //Post
     @PreAuthorize("hasRole('ROLE_TRAINER')")
     @Override
-   @JsonIgnore
+    @JsonIgnore
     public ResponseEntity<MessageResponse> addTraining(long trainerId, AddTrainingRequest addTrainingRequest) {
         Activity activity = new Activity(
                 addTrainingRequest.getActivityName(),
+                addTrainingRequest.getNameTrainer(),
                 addTrainingRequest.getLocation(),
                 addTrainingRequest.getTime(),
                 addTrainingRequest.getDate()
@@ -72,49 +79,44 @@ public class ActivityService implements IActivityService {
             return ResponseEntity
                     .ok()
                     .body(new MessageResponse("Activity added."));
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Trainer not found."));
         }
+
+    }
+
+        //Put
+     @PreAuthorize("hasRole('ROLE_TRAINER')")
+     @Override
+     public Activity updateUserById ( @Valid long activityId, Activity updateTrainerActivity){
+        return activityRepository.findById(activityId).map(
+                trainer -> {
+                    trainer.setActivityName(updateTrainerActivity.getActivityName());
+                    trainer.setLocation(updateTrainerActivity.getLocation());
+                    trainer.setTime(updateTrainerActivity.getTime());
+                    trainer.setDate(updateTrainerActivity.getDate());
+                    return activityRepository.save(trainer);
+                })// Kan de user niet vinden in database
+          .orElseThrow( () -> new UserSportNotFoundException("Activity not found"));
+    }
+
+        //Delete
+    @PreAuthorize("hasRole('ROLE_TRAINER') or hasRole('ROLE_ADMIN')")
+    public ResponseEntity<MessageResponse> deleteActivity(long activityId) {
+        Optional<Activity> activity = activityRepository.findById(activityId);
+        if (activity.isPresent()) {
+            return ResponseEntity
+                    .ok()
+                    .body(new MessageResponse("Successfully deleted!"));
+        } else {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Trainer not found."));
 
-    }
-
-
-
-        //Put
-        @PreAuthorize("hasRole('ROLE_TRAINER')")
-        @Override
-        public Activity updateUserById ( @Valid long activityId, Activity updateTrainerActivity){
-            return activityRepository.findById(activityId).map(
-                    trainer -> {
-                        trainer.setLocation(updateTrainerActivity.getLocation());
-                        trainer.setTime(updateTrainerActivity.getTime());
-                        trainer.setDate(updateTrainerActivity.getDate());
-                        return activityRepository.save(trainer);
-                    })
-                    // Kan de user niet vinden in database
-                    .orElseThrow( () -> new UserSportNotFoundException("Activity not found"));
-
+            }
         }
-
-
-        //Delete
-        @PreAuthorize("hasRole('ROLE_TRAINER') or hasRole('ROLE_ADMIN')")
-        public ResponseEntity<MessageResponse> deleteActivity ( long activityId) {
-        Optional<Activity> activity = activityRepository.findById(activityId);
-            if (activity.isPresent()) {
-            activityRepository.deleteById(activityId);
-            return ResponseEntity
-                    .ok()
-                    .body(new MessageResponse("Succesfully deleted!"));
-        }
-
-        return ResponseEntity
-                .badRequest()
-                .body(new MessageResponse("Unsuccesfully deleted!"));
-
-
-    }
 
 }
 

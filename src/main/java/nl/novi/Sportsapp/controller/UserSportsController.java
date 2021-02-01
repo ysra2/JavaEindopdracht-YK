@@ -30,6 +30,7 @@ public class UserSportsController {
         return userSportsService.getTrainer(userId);
     }
 
+
     @PutMapping("/{trainerId}")
     // gegevens updaten, dit gaan trainers gebruiken om trainingen te updaten (in tijd/datum)
     public UserSports updateUserById(@RequestBody UserSports updateTrainer,

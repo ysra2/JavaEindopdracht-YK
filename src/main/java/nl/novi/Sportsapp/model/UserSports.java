@@ -27,8 +27,8 @@ public class UserSports {
     private String password;
 
     @ManyToMany(cascade = {CascadeType.ALL})
-    //verschillende activitieten hebben ook verschillende trainers
-    @JoinTable(name = "sporter_activity",
+    //verschillende activiteiten hebben ook verschillende trainers
+    @JoinTable(name = "sport_activity",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "activity_id"))
     private List<Activity> activities;

@@ -15,6 +15,7 @@ public class Activity {
     private long activityId;
 
     private String activityName;
+    private String nameTrainer;
     private String location;
 
     private String time;
@@ -32,12 +33,14 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(String activityName, String location, String time, String date) {
+    public Activity(String activityName, String nameTrainer, String location, String time, String date) {
         this.activityName=activityName;
+        this.nameTrainer = nameTrainer;
         this.location = location;
         this.time = time;
         this.date = date;
     }
+
 
 
     public long getActivityId() {
@@ -55,6 +58,14 @@ public class Activity {
 
     public void setActivityName(String activityName) {
         this.activityName = activityName;
+    }
+
+    public String getNameTrainer() {
+        return nameTrainer;
+    }
+
+    public void setNameTrainer(String nameTrainer) {
+        this.nameTrainer = nameTrainer;
     }
 
     public String getLocation() {

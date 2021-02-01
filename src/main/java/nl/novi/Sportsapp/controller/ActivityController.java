@@ -16,7 +16,7 @@ import java.util.List;
 // alleen gevens die het ontvangen en doorsturen mogelijk maakt
 //geldt voor de klasse als de methode
 
-@CrossOrigin(origins = { "*", "http://localhost:8080"}, maxAge = 3600)
+@CrossOrigin(origins =  "*", allowedHeaders = "*", maxAge = 3600, allowCredentials = "false" )
 @RestController //spring weet dan dat we met een restcontroller te maken hebben
 @RequestMapping(value = "/api/activity")
 public class ActivityController {
@@ -26,26 +26,31 @@ public class ActivityController {
             ActivityService activityService;
 
 
-    @GetMapping("/{activityName}") //downloaden
-    public List<Activity> getActivitiesByActivityName(@PathVariable String activityName) {
+    @GetMapping
+    public List<Activity> getActivity() {
+        return activityService.getActivity();
+    }
+
+    @GetMapping(value = "/{activityName}") //downloaden
+    public List<Activity> getActivityByActivityName(@PathVariable String activityName) {
         return activityService.getActivitiesByActivityName(activityName);
     }
 
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/{trainerId}") // activiteit toevoegen
     public ResponseEntity<MessageResponse> addTraining(@RequestBody AddTrainingRequest addTrainingRequest,
                                                        @PathVariable long trainerId) {
         return activityService.addTraining(trainerId, addTrainingRequest);
     }
 
-    @PutMapping("/{activityId}")
+    @PutMapping(value = "/{activityId}")
     // gegevens updaten, dit gaan trainers gebruiken om trainingen te updaten (in tijd/datum)
     public Activity updateUserById(@RequestBody Activity updateTrainerActivity,
                                    @PathVariable long activityId) {
         return activityService.updateUserById(activityId, updateTrainerActivity);
     }
 
-    @DeleteMapping(path = "/{activityId}")
+    @DeleteMapping(value = "/{activityId}")
     public ResponseEntity<MessageResponse> deleteActivity(@PathVariable long activityId){
         return activityService.deleteActivity(activityId);
     }

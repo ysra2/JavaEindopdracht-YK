@@ -7,18 +7,23 @@ import javax.validation.constraints.NotBlank;
 
 public class AddTrainingRequest {
 
+    public String getActivityId;
+
     @NotBlank
     private String trainingactivity;
+
     @NotBlank
     private String nameTrainer;
 
     @NotBlank
     private String activityName;
+
     @NotBlank
     private String location;
 
     @NotBlank
     private String time;
+
     @NotBlank
     private String date;
 
