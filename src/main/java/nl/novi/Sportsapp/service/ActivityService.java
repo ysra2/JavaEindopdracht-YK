@@ -28,11 +28,11 @@ public class ActivityService implements IActivityService {
 
     @Autowired
     private UserSportsRepository userSportsRepository;
-
-       //Get all activities
-    public List<Activity> getActivity() {
-        return activityRepository.getActivity();
-    }
+//
+//       //Get all activities
+//    public List<Activity> getActivity() {
+//        return activityRepository.getActivity();
+//    }
 
 
     //Get{id}
@@ -68,7 +68,7 @@ public class ActivityService implements IActivityService {
             Optional<UserSports> trainer = userSportsRepository.findById(trainerId);
             if (trainer.isPresent()) {
                 UserSports trainerFromDb = trainer.get();
-                List<Activity> activities = trainerFromDb.getActivities();
+                List<Activity>activities = trainerFromDb.getActivities();
 
                 activities.add(activity);
                 trainerFromDb.setActivities(activities);

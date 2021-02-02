@@ -12,6 +12,8 @@ public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator="native")
     @GenericGenerator(name = "native", strategy = "native")
+
+    @Column(columnDefinition = "serial")
     private long activityId;
 
     private String activityName;
@@ -40,7 +42,6 @@ public class Activity {
         this.time = time;
         this.date = date;
     }
-
 
 
     public long getActivityId() {

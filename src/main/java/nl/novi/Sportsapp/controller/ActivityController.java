@@ -26,10 +26,10 @@ public class ActivityController {
             ActivityService activityService;
 
 
-    @GetMapping
-    public List<Activity> getActivity() {
-        return activityService.getActivity();
-    }
+//    @GetMapping
+//    public List<Activity> getActivity() {
+//        return activityService.getActivity();
+//    }
 
     @GetMapping(value = "/{activityName}") //downloaden
     public List<Activity> getActivityByActivityName(@PathVariable String activityName) {
