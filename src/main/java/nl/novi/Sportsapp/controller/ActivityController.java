@@ -38,7 +38,7 @@ public class ActivityController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/{trainerId}") // activiteit toevoegen
-    public ResponseEntity<MessageResponse> addTraining(@RequestBody AddTrainingRequest addTrainingRequest,
+    public ResponseEntity<Activity> addTraining(@RequestBody AddTrainingRequest addTrainingRequest,
                                                        @PathVariable long trainerId) {
         return activityService.addTraining(trainerId, addTrainingRequest);
     }

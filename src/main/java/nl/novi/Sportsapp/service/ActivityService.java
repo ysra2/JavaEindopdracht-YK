@@ -50,7 +50,7 @@ public class ActivityService implements IActivityService {
     @PreAuthorize("hasRole('ROLE_TRAINER')")
     @Override
     @JsonIgnore
-    public ResponseEntity<MessageResponse> addTraining(long trainerId, AddTrainingRequest addTrainingRequest) {
+    public ResponseEntity<Activity> addTraining(long trainerId, AddTrainingRequest addTrainingRequest) {
         Activity activity = new Activity(
                 addTrainingRequest.getActivityName(),
                 addTrainingRequest.getNameTrainer(),
@@ -68,7 +68,7 @@ public class ActivityService implements IActivityService {
             Optional<UserSports> trainer = userSportsRepository.findById(trainerId);
             if (trainer.isPresent()) {
                 UserSports trainerFromDb = trainer.get();
-                List<Activity>activities = trainerFromDb.getActivities();
+                List<Activity> activities = trainerFromDb.getActivities();
 
                 activities.add(activity);
                 trainerFromDb.setActivities(activities);
@@ -76,15 +76,24 @@ public class ActivityService implements IActivityService {
                 activity.setTrainer(trainer.get());
                 activityRepository.save(activity);
             }
+
             return ResponseEntity
-                    .ok()
-                    .body(new MessageResponse("Activity added."));
+                    .ok(new Activity(
+                            activity.getActivityId(),
+                            activity.getActivityName(),
+                            activity.getNameTrainer(),
+                            activity.getLocation(),
+                            activity.getTime(),
+                            activity.getDate()
+
+                    ));
         } else {
-            return ResponseEntity
+            ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Trainer not found."));
+                    .body(new MessageResponse("Activity not found."));
         }
 
+        return null;
     }
 
         //Put

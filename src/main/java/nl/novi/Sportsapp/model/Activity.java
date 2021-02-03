@@ -43,6 +43,15 @@ public class Activity {
         this.date = date;
     }
 
+    public Activity(long activityId, String activityName, String nameTrainer, String location, String time, String date) {
+        this.activityId=activityId;
+        this.activityName=activityName;
+        this.nameTrainer = nameTrainer;
+        this.location = location;
+        this.time = time;
+        this.date = date;
+    }
+
 
     public long getActivityId() {
         return activityId;

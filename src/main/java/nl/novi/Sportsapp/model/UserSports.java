@@ -16,6 +16,7 @@ public class UserSports {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
+
     @Column(columnDefinition = "serial")
     private long userId;
     //private zorgt ervoor dat het alleen toegankelijk is voor de desbetreffende klasse
