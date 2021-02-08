@@ -1,17 +1,14 @@
 package nl.novi.Sportsapp.dto.request;
 
-import nl.novi.Sportsapp.model.UserSports;
+import nl.novi.Sportsapp.model.Activity;
 
 public class PlaceMapsRequest {
     private long mapId;
 
-    private String place;
-    private String location;
-    private int zipcode;
     private double latitude;
     private double longitude;
 
-    private UserSports trainer;
+    private Activity activity;
 
     public long getMapId() {
         return mapId;
@@ -19,30 +16,6 @@ public class PlaceMapsRequest {
 
     public void setMapId(long mapId) {
         this.mapId = mapId;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public int getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(int zipcode) {
-        this.zipcode = zipcode;
     }
 
     public double getLatitude() {
@@ -61,11 +34,11 @@ public class PlaceMapsRequest {
         this.longitude = longitude;
     }
 
-    public UserSports getTrainer() {
-        return trainer;
+    public Activity getActivity() {
+        return activity;
     }
 
-    public void setTrainer(UserSports trainer) {
-        this.trainer = trainer;
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 }

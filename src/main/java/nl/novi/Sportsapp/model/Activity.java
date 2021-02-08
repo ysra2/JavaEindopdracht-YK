@@ -118,7 +118,4 @@ public class Activity {
         this.trainer = trainer;
     }
 
-
-
-
 }
