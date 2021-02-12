@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins =  "*", allowedHeaders = "*", maxAge = 3600, allowCredentials = "false" )
 @RestController //spring weet dan dat we met een restcontroller te maken hebben
 @RequestMapping(value = "/api/maps")
@@ -15,10 +17,10 @@ public class MapPositionController {
     @Autowired
     private MapPositionService mapPositionService;
 
-//    @GetMapping
-//    public List<Maps> getLocation() {
-//        return mapsService.getLocation();
-//    }
+    @GetMapping
+    public List<MapPosition> getLocation() {
+        return mapPositionService.getLocation();
+    }
 
     @PostMapping(value="/place")
     public MapPosition newLocationOnMap(@RequestBody MapPosition newLocationMap ){

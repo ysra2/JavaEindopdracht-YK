@@ -29,9 +29,10 @@ public class MapPositionService implements IMapPositionService {
     @Autowired
     private UserSportsRepository userSportsRepository;
 
-//    public List<Maps> getLocation() {
-//        return mapsRepository.getLocation();
-//    }
+    public List<MapPosition> getLocation() {
+        List<MapPosition> mapPositionList = mapPositionRepository.findAll();
+        return mapPositionList;
+    }
 
     public MapPosition save(MapPosition newLocationMap) {
         return mapPositionRepository.save(newLocationMap);

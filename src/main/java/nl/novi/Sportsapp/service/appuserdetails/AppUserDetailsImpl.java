@@ -16,6 +16,8 @@ public class AppUserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
     private final Long userId;
     private final String username;
+    private final String firstname;
+
     private final String email;
 
     @JsonIgnore
@@ -23,10 +25,12 @@ public class AppUserDetailsImpl implements UserDetails {
 
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public AppUserDetailsImpl(Long userId, String username, String email, String password,
+    public AppUserDetailsImpl(Long userId, String username, String firstname,
+                              String lastname, String email, String password,
                               Collection<? extends GrantedAuthority> authorities) {
         this.userId = userId;
         this.username = username;
+        this.firstname = firstname;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
@@ -39,6 +43,8 @@ public class AppUserDetailsImpl implements UserDetails {
 
         return new AppUserDetailsImpl(
                 user.getUserId(),
+                user.getFirstname(),
+                user.getLastname(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
@@ -51,6 +57,10 @@ public class AppUserDetailsImpl implements UserDetails {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getFirstname() {
+        return firstname;
     }
 
     @Override

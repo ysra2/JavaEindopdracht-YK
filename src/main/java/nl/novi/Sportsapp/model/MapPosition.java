@@ -30,7 +30,6 @@ public class MapPosition {
 
     }
 
-
     public MapPosition(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;

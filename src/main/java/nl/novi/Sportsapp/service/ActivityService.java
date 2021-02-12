@@ -28,11 +28,12 @@ public class ActivityService implements IActivityService {
 
     @Autowired
     private UserSportsRepository userSportsRepository;
-//
-//       //Get all activities
-//    public List<Activity> getActivity() {
-//        return activityRepository.getActivity();
-//    }
+
+       //Get all activities
+    public List<Activity> getActivity() {
+        List<Activity> activityList = activityRepository.findAll();
+        return activityList;
+    }
 
 
     //Get{id}
@@ -106,8 +107,8 @@ public class ActivityService implements IActivityService {
                     trainer.setLocation(updateTrainerActivity.getLocation());
                     trainer.setTime(updateTrainerActivity.getTime());
                     trainer.setDate(updateTrainerActivity.getDate());
-                    return activityRepository.save(trainer);
-                })// Kan de user niet vinden in database
+                    return activityRepository.saveAndFlush(trainer);
+                })// Kan de activity niet vinden in database
           .orElseThrow( () -> new UserSportNotFoundException("Activity not found"));
     }
 
@@ -127,6 +128,21 @@ public class ActivityService implements IActivityService {
             }
         }
 
+
+    @PreAuthorize("hasRole('ROLE_SPORTER')")
+    public ResponseEntity<MessageResponse> acceptActivity( @Valid long activityId) {
+        Optional<Activity> activity = activityRepository.findById(activityId);
+        if (activity.isPresent()) {
+            return ResponseEntity
+                    .ok()
+                    .body(new MessageResponse("Successfully accepted!"));
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error"));
+
+        }
+    }
 }
 
 

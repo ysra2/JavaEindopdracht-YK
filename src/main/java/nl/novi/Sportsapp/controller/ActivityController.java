@@ -26,10 +26,10 @@ public class ActivityController {
             ActivityService activityService;
 
 
-//    @GetMapping
-//    public List<Activity> getActivity() {
-//        return activityService.getActivity();
-//    }
+    @GetMapping
+    public List<Activity> getActivity() {
+        return activityService.getActivity();
+    }
 
     @GetMapping(value = "/{activityName}") //downloaden
     public List<Activity> getActivityByActivityName(@PathVariable String activityName) {
@@ -53,5 +53,10 @@ public class ActivityController {
     @DeleteMapping(value = "/{activityId}")
     public ResponseEntity<MessageResponse> deleteActivity(@PathVariable long activityId){
         return activityService.deleteActivity(activityId);
+    }
+
+    @PostMapping
+    public ResponseEntity<MessageResponse> acceptActivity(@PathVariable long activityId){
+        return activityService.acceptActivity(activityId);
     }
 }
