@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -144,13 +145,14 @@ public class AuthenticationService {
         //voegt de rol toe
         List<String> roles = userDetails.getAuthorities()
                 .stream()
-                .map(item -> item.getAuthority())
+                .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
         //geeft terug aan response entity
         //status ok is 202 in postman
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getUserId(),
+                userDetails.getFirstname(),
                 userDetails.getEmail(),
                 userDetails.getPassword(),
                 roles
