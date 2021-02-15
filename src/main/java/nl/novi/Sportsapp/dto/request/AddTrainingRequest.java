@@ -19,7 +19,13 @@ public class AddTrainingRequest {
     private String activityName;
 
     @NotBlank
-    private String location;
+    private String address;
+
+    @NotBlank
+    private String city;
+
+    @NotBlank
+    private String zipcode;
 
     @NotBlank
     private String time;
@@ -54,12 +60,28 @@ public class AddTrainingRequest {
         this.activityName = activityName;
     }
 
-    public String getLocation() {
-        return location;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 
     public String getTime() {

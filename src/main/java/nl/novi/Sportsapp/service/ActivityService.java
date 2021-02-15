@@ -51,11 +51,14 @@ public class ActivityService implements IActivityService {
     @PreAuthorize("hasRole('ROLE_TRAINER')")
     @Override
     @JsonIgnore
-    public ResponseEntity<Activity> addTraining(long trainerId, AddTrainingRequest addTrainingRequest) {
+    public ResponseEntity<Activity> addTraining(long trainerId,
+                                                AddTrainingRequest addTrainingRequest) {
         Activity activity = new Activity(
                 addTrainingRequest.getActivityName(),
                 addTrainingRequest.getNameTrainer(),
-                addTrainingRequest.getLocation(),
+                addTrainingRequest.getAddress(),
+                addTrainingRequest.getZipcode(),
+                addTrainingRequest.getCity(),
                 addTrainingRequest.getTime(),
                 addTrainingRequest.getDate()
         );
@@ -76,14 +79,18 @@ public class ActivityService implements IActivityService {
 
                 activity.setTrainer(trainer.get());
                 activityRepository.save(activity);
+
             }
+
 
             return ResponseEntity
                     .ok(new Activity(
                             activity.getActivityId(),
                             activity.getActivityName(),
                             activity.getNameTrainer(),
-                            activity.getLocation(),
+                            activity.getAddress(),
+                            activity.getZipcode(),
+                            activity.getCity(),
                             activity.getTime(),
                             activity.getDate()
 
@@ -104,7 +111,9 @@ public class ActivityService implements IActivityService {
         return activityRepository.findById(activityId).map(
                 trainer -> {
                     trainer.setActivityName(updateTrainerActivity.getActivityName());
-                    trainer.setLocation(updateTrainerActivity.getLocation());
+                    trainer.setAddress(updateTrainerActivity.getAddress());
+                    trainer.setZipcode(updateTrainerActivity.getZipcode());
+                    trainer.setCity(updateTrainerActivity.getCity());
                     trainer.setTime(updateTrainerActivity.getTime());
                     trainer.setDate(updateTrainerActivity.getDate());
                     return activityRepository.saveAndFlush(trainer);
@@ -143,6 +152,22 @@ public class ActivityService implements IActivityService {
 
         }
     }
+
+    @PreAuthorize("hasRole('ROLE_SPORTER')")
+    public ResponseEntity<MessageResponse> declineActivity(long activityId) {
+        Optional<Activity> activity = activityRepository.findById(activityId);
+        if (activity.isPresent()) {
+            return ResponseEntity
+                    .ok()
+                    .body(new MessageResponse("Activiteit Geannuleerd!"));
+        } else {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Geen activiteit gevonden."));
+
+        }
+    }
+
 }
 
 

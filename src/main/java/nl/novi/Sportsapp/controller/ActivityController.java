@@ -1,5 +1,6 @@
 package nl.novi.Sportsapp.controller;
 
+import com.google.maps.errors.ApiException;
 import nl.novi.Sportsapp.dto.request.AddTrainingRequest;
 import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.model.Activity;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 //Single responsibility principle
@@ -39,7 +41,7 @@ public class ActivityController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/{trainerId}") // activiteit toevoegen
     public ResponseEntity<Activity> addTraining(@RequestBody AddTrainingRequest addTrainingRequest,
-                                                       @PathVariable long trainerId) {
+                                                       @PathVariable long trainerId) throws InterruptedException, ApiException, IOException {
         return activityService.addTraining(trainerId, addTrainingRequest);
     }
 
@@ -55,8 +57,14 @@ public class ActivityController {
         return activityService.deleteActivity(activityId);
     }
 
-    @PostMapping
+    @PostMapping(value= "/sporter/accept/{activityId}")
     public ResponseEntity<MessageResponse> acceptActivity(@PathVariable long activityId){
         return activityService.acceptActivity(activityId);
     }
+
+    @DeleteMapping(value= "/sporter/decline/{activityId}")
+    public ResponseEntity<MessageResponse> declineActivity(@PathVariable long activityId){
+        return activityService.declineActivity(activityId);
+    }
+
 }

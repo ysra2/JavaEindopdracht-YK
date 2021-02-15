@@ -18,8 +18,9 @@ public class Activity {
 
     private String activityName;
     private String nameTrainer;
-    private String location;
-
+    private String address;
+    private String zipcode;
+    private String city;
     private String time;
     private String date;
 
@@ -35,21 +36,21 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(String activityName, String nameTrainer, String location, String time, String date) {
+
+    public Activity(String activityName, String nameTrainer, String address,
+                    String zipcode, String city, String time, String date) {
         this.activityName=activityName;
         this.nameTrainer = nameTrainer;
-        this.location = location;
+        this.address = address;
+        this.zipcode = zipcode;
+        this.city = city;
         this.time = time;
         this.date = date;
     }
 
-    public Activity(long activityId, String activityName, String nameTrainer, String location, String time, String date) {
-        this.activityId=activityId;
-        this.activityName=activityName;
-        this.nameTrainer = nameTrainer;
-        this.location = location;
-        this.time = time;
-        this.date = date;
+    public Activity(long activityId, String activityName, String nameTrainer,
+                    String address, String zipcode, String city,
+                    String time, String date) {
     }
 
 
@@ -78,12 +79,28 @@ public class Activity {
         this.nameTrainer = nameTrainer;
     }
 
-    public String getLocation() {
-        return location;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getTime() {
