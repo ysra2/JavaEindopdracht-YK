@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 
 @Service
@@ -58,18 +57,6 @@ public class ActivityService implements IActivityService {
             activity.setTrainer(appUserSport.get());
             activityRepository.save(activity);
 
-            Optional<UserSports> trainer = userSportsRepository.findById(trainerId);
-            if (trainer.isPresent()) {
-                UserSports trainerFromDb = trainer.get();
-                Set<Activity> activities = trainerFromDb.getActivities();
-
-                activities.add(activity);
-                trainerFromDb.setActivities(activities);
-
-                activity.setTrainer(trainer.get());
-                activityRepository.save(activity);
-            }
-
             return ResponseEntity
                     .ok()
                     .body(new Activity(
@@ -109,15 +96,16 @@ public class ActivityService implements IActivityService {
         if (activityRepository.findById(activityId).isPresent()) {
             activityRepository.deleteById(activityId);
             return ResponseEntity
+                    .ok()
+                    .body(new MessageResponse("Activiteit succesvol verwijderd!"));
+        } else {
+            return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error"));
 
 
-        } else return ResponseEntity
-                .ok()
-                .body(new MessageResponse("Successfully accepted!"));
-
-}
+        }
+    }
 
     @PreAuthorize("hasRole('ROLE_SPORTER')")
     public ResponseEntity<MessageResponse> acceptActivity( @Valid long activityId) {

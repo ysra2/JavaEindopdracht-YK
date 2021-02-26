@@ -33,7 +33,7 @@ public class UserSports {
             (name = "sporter_activity",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "activity_id"))
-    private Set<Activity> activities ;
+    private List<Activity> activities ;
 
     @JsonIgnoreProperties
     //omdat de relatie bi-rationeel is zorgt deze annotatie ervoor dat
@@ -104,11 +104,11 @@ public class UserSports {
         this.password = password;
     }
 
-    public Set<Activity> getActivities() {
+    public List<Activity> getActivities() {
         return activities;
     }
 
-    public void setActivities(Set<Activity> activities) {
+    public void setActivities(List<Activity> activities) {
         this.activities = activities;
     }
 

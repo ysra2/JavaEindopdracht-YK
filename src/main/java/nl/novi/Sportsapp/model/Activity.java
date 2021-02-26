@@ -12,7 +12,6 @@ public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    @Column(columnDefinition = "serial")
     private long activityId;
 
     private String activityName;
@@ -57,12 +56,6 @@ public class Activity {
         this.city = city;
         this.time = time;
         this.date = date;
-    }
-
-    public Activity(String address, String zipcode, String city) {
-        this.address = address;
-        this.zipcode = zipcode;
-        this.city = city;
     }
 
 
