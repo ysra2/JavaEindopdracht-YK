@@ -61,12 +61,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/api/auth/**").permitAll()
+                .antMatchers("/api/auth/**")
+                .permitAll()
+
                 .antMatchers("/api/user_sports/**")
                 .access("hasRole('ROLE_TRAINER') or hasRole('ROLE_SPORTER') or hasRole('ROLE_ADMIN')")
+
+                .antMatchers("/api/user_sports/trainer/**")
+                .access("hasRole('ROLE_TRAINER') or hasRole('ROLE_ADMIN')")
+
+                .antMatchers("/api/user_sports/sporter/**")
+                .access(" hasRole('ROLE_SPORTER') or hasRole('ROLE_ADMIN')")
+
+                .antMatchers("/api/user_sports/admin/**")
+                .access("hasRole('ROLE_ADMIN')")
+
                 .antMatchers("/api/activity/**")
                 .access("hasRole('ROLE_TRAINER') or hasRole('ROLE_SPORTER') or hasRole('ROLE_ADMIN')")
-                .antMatchers("/api/test/**").permitAll()
+
+                .antMatchers("/api/activity/trainer/**")
+                .access("hasRole('ROLE_TRAINER')")
+
+                .antMatchers("/api/activity/sporter/**")
+                .access("hasRole('ROLE_SPORTER')")
+
+                .antMatchers("/api/test/**")
+                .permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

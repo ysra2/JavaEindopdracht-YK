@@ -11,7 +11,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,66 +29,59 @@ public class UserSportsService implements IUserSportsService {
 
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TRAINER')")
     public List<UserSports> getTrainers() {
         List<UserSports> trainerList = userSportsRepository.findAll();
         return trainerList;
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SPORTER')")
+    public List<UserSports> getSporters() {
+        List<UserSports> sporterList = userSportsRepository.findAll();
+        return sporterList;
+    }
+
+    @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_TRAINER')")
     public UserSports getTrainer(long userId){
         return userSportsRepository.findById(userId).orElseThrow(
                 () -> new UserSportNotFoundException("User"+ " " + userId + " " + " not found"));
     }
 
-
-    //Put
-    @PreAuthorize("hasRole('ROLE_TRAINER')")
     @Override
-    public UserSports updateUserById (@Valid long trainerId, UserSports updateTrainer){
-        return userSportsRepository.findById(trainerId).map(
-                trainer -> {
-                    trainer.setFirstname(updateTrainer.getFirstname());
-                    trainer.setLastname(updateTrainer.getLastname());
-                    trainer.setEmail(updateTrainer.getEmail());
-                    trainer.setPassword(updateTrainer.getPassword());
-                    return userSportsRepository.save(trainer);
-                })
-                // Kan de user niet vinden in database
-                .orElseThrow( () -> new UserSportNotFoundException("Activity not found"));
-
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SPORTER')")
+    public UserSports getSporter(long userId){
+        return userSportsRepository.findById(userId).orElseThrow(
+                () -> new UserSportNotFoundException("User"+ " " + userId + " " + " not found"));
     }
 
     //Delete users
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
-    public ResponseEntity<MessageResponse> deleteTrainer(long id){
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public boolean deleteTrainer(long id){
         Optional<UserSports> trainer = userSportsRepository.findById(id);
-        if (trainer.isPresent()) {
+        if (trainer.isPresent()){
             userSportsRepository.deleteById(id);
-            return ResponseEntity
-                    .ok()
-                    .body(new MessageResponse("Succesfully deleted!"));
+            return true;
+        } else{
+            return false;
         }
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Unsuccesfully deleted!"));
-
-
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<MessageResponse> deleteSporter(long id){
         Optional<UserSports> sporter = userSportsRepository.findById(id);
         if (sporter.isPresent()) {
             userSportsRepository.deleteById(id);
             return ResponseEntity
                     .ok()
-                    .body(new MessageResponse("Succesfully deleted!"));
+                    .body(new MessageResponse("Successfully deleted!"));
         }
         return ResponseEntity
                 .badRequest()
-                .body(new MessageResponse("Unsuccesfully deleted!"));
+                .body(new MessageResponse("Unsuccessfully deleted!"));
 
 
     }

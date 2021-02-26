@@ -8,7 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
-// List<Activity> getActivity();
  List<Activity> getActivitiesByActivityName(String activityName);
 
 }

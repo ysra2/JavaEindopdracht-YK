@@ -27,12 +27,13 @@ public class UserSports {
     private String email;
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     //verschillende activiteiten hebben ook verschillende trainers
-    @JoinTable(name = "sporter_activity",
+    @JoinTable
+            (name = "sporter_activity",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "activity_id"))
-    private List<Activity> activities;
+    private Set<Activity> activities ;
 
     @JsonIgnoreProperties
     //omdat de relatie bi-rationeel is zorgt deze annotatie ervoor dat
@@ -58,8 +59,6 @@ public class UserSports {
         this.email = email;
         this.password = password;
     }
-
-
 
     public long getUserId() {
         return userId;
@@ -105,11 +104,11 @@ public class UserSports {
         this.password = password;
     }
 
-    public List<Activity> getActivities() {
+    public Set<Activity> getActivities() {
         return activities;
     }
 
-    public void setActivities(List<Activity> activities) {
+    public void setActivities(Set<Activity> activities) {
         this.activities = activities;
     }
 

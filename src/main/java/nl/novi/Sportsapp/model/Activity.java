@@ -10,9 +10,8 @@ import java.util.List;
 public class Activity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator="native")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-
     @Column(columnDefinition = "serial")
     private long activityId;
 
@@ -48,9 +47,22 @@ public class Activity {
         this.date = date;
     }
 
-    public Activity(long activityId, String activityName, String nameTrainer,
-                    String address, String zipcode, String city,
-                    String time, String date) {
+    public Activity(long activityId, String activityName, String nameTrainer, String address,
+                    String zipcode, String city, String time, String date) {
+        this.activityId=activityId;
+        this.activityName=activityName;
+        this.nameTrainer = nameTrainer;
+        this.address = address;
+        this.zipcode = zipcode;
+        this.city = city;
+        this.time = time;
+        this.date = date;
+    }
+
+    public Activity(String address, String zipcode, String city) {
+        this.address = address;
+        this.zipcode = zipcode;
+        this.city = city;
     }
 
 
@@ -134,5 +146,6 @@ public class Activity {
     public void setTrainer(UserSports trainer) {
         this.trainer = trainer;
     }
+
 
 }

@@ -24,26 +24,27 @@ public class UserSportsController {
         return userSportsService.getTrainers();
     }
 
+    @GetMapping("/sporter") //gegevens ophalen
+    public List<UserSports> getSporters() {
+        return userSportsService.getTrainers();
+    }
 
     @GetMapping("/trainer/{userId}") // gegevens ophalen per Id trainer
     public UserSports getTrainer(@PathVariable long userId){
         return userSportsService.getTrainer(userId);
     }
 
-
-    @PutMapping("/{trainerId}")
-    // gegevens updaten, dit gaan trainers gebruiken om trainingen te updaten (in tijd/datum)
-    public UserSports updateUserById(@RequestBody UserSports updateTrainer,
-                                   @PathVariable long trainerId) {
-        return userSportsService.updateUserById(trainerId, updateTrainer);
+    @GetMapping("/sporter/{userId}") // gegevens ophalen per Id sporter
+    public UserSports getSporter(@PathVariable long userId){
+        return userSportsService.getTrainer(userId);
     }
 
-    @DeleteMapping("/trainer/{id}") //gegevens verwijderen
-    public ResponseEntity<MessageResponse> deleteTrainer (@PathVariable long id){
+    @DeleteMapping("/admin/trainer/{id}") //gegevens verwijderen
+    public boolean deleteTrainer(@PathVariable long id){
         return userSportsService.deleteTrainer(id);
     }
 
-    @DeleteMapping("/sporter/{id}") //gegevens verwijderen
+    @DeleteMapping("/admin/sporter/{id}") //gegevens verwijderen
     public ResponseEntity<MessageResponse> deleteSporter (@PathVariable long id){
         return userSportsService.deleteSporter(id);
     }

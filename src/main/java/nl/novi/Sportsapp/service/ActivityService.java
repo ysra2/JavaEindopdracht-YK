@@ -17,42 +17,31 @@ import org.springframework.stereotype.Service;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 @Service
 public class ActivityService implements IActivityService {
 
-    //    private static final String ROLE_NOT_FOUND_ERROR = "Error: Role is not found.";
     @Autowired
     private ActivityRepository activityRepository;
 
     @Autowired
     private UserSportsRepository userSportsRepository;
 
-       //Get all activities
+    //Get all activities
+    @PreAuthorize("hasRole('ROLE_TRAINER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_SPORTER')")
     public List<Activity> getActivity() {
         List<Activity> activityList = activityRepository.findAll();
         return activityList;
     }
 
 
-    //Get{id}
-    public List<Activity> getActivitiesByActivityName(String activityName) {
-        List<Activity> activities = activityRepository.getActivitiesByActivityName(activityName);
-        if (activities.isEmpty()) {
-            ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Activity not found."));
-        }
-            return activities;
-    }
-
     //Post
-    @PreAuthorize("hasRole('ROLE_TRAINER')")
     @Override
+    @PreAuthorize("hasRole('ROLE_TRAINER')")
     @JsonIgnore
-    public ResponseEntity<Activity> addTraining(long trainerId,
-                                                AddTrainingRequest addTrainingRequest) {
+    public ResponseEntity<Activity> addTraining(long trainerId, AddTrainingRequest addTrainingRequest) {
         Activity activity = new Activity(
                 addTrainingRequest.getActivityName(),
                 addTrainingRequest.getNameTrainer(),
@@ -72,19 +61,18 @@ public class ActivityService implements IActivityService {
             Optional<UserSports> trainer = userSportsRepository.findById(trainerId);
             if (trainer.isPresent()) {
                 UserSports trainerFromDb = trainer.get();
-                List<Activity> activities = trainerFromDb.getActivities();
+                Set<Activity> activities = trainerFromDb.getActivities();
 
                 activities.add(activity);
                 trainerFromDb.setActivities(activities);
 
                 activity.setTrainer(trainer.get());
                 activityRepository.save(activity);
-
             }
 
-
             return ResponseEntity
-                    .ok(new Activity(
+                    .ok()
+                    .body(new Activity(
                             activity.getActivityId(),
                             activity.getActivityName(),
                             activity.getNameTrainer(),
@@ -93,21 +81,15 @@ public class ActivityService implements IActivityService {
                             activity.getCity(),
                             activity.getTime(),
                             activity.getDate()
-
                     ));
-        } else {
-            ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Activity not found."));
         }
-
         return null;
     }
 
-        //Put
-     @PreAuthorize("hasRole('ROLE_TRAINER')")
-     @Override
-     public Activity updateUserById ( @Valid long activityId, Activity updateTrainerActivity){
+    //Put
+    @PreAuthorize("hasRole('ROLE_TRAINER')")
+    @Override
+    public Activity updateUserById(@Valid long activityId, Activity updateTrainerActivity) {
         return activityRepository.findById(activityId).map(
                 trainer -> {
                     trainer.setActivityName(updateTrainerActivity.getActivityName());
@@ -116,27 +98,26 @@ public class ActivityService implements IActivityService {
                     trainer.setCity(updateTrainerActivity.getCity());
                     trainer.setTime(updateTrainerActivity.getTime());
                     trainer.setDate(updateTrainerActivity.getDate());
-                    return activityRepository.saveAndFlush(trainer);
+                    return activityRepository.save(trainer);
                 })// Kan de activity niet vinden in database
-          .orElseThrow( () -> new UserSportNotFoundException("Activity not found"));
+                .orElseThrow(() -> new UserSportNotFoundException("Activity not found"));
     }
 
-        //Delete
-    @PreAuthorize("hasRole('ROLE_TRAINER') or hasRole('ROLE_ADMIN')")
+    //Delete
+    @PreAuthorize("hasRole('ROLE_TRAINER')")
     public ResponseEntity<MessageResponse> deleteActivity(long activityId) {
-        Optional<Activity> activity = activityRepository.findById(activityId);
-        if (activity.isPresent()) {
-            return ResponseEntity
-                    .ok()
-                    .body(new MessageResponse("Successfully deleted!"));
-        } else {
+        if (activityRepository.findById(activityId).isPresent()) {
+            activityRepository.deleteById(activityId);
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Trainer not found."));
+                    .body(new MessageResponse("Error"));
 
-            }
-        }
 
+        } else return ResponseEntity
+                .ok()
+                .body(new MessageResponse("Successfully accepted!"));
+
+}
 
     @PreAuthorize("hasRole('ROLE_SPORTER')")
     public ResponseEntity<MessageResponse> acceptActivity( @Valid long activityId) {
@@ -157,6 +138,7 @@ public class ActivityService implements IActivityService {
     public ResponseEntity<MessageResponse> declineActivity(long activityId) {
         Optional<Activity> activity = activityRepository.findById(activityId);
         if (activity.isPresent()) {
+            activityRepository.deleteById(activityId);
             return ResponseEntity
                     .ok()
                     .body(new MessageResponse("Activiteit Geannuleerd!"));
@@ -167,7 +149,5 @@ public class ActivityService implements IActivityService {
 
         }
     }
-
 }
-
 

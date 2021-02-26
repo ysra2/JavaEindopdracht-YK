@@ -1,6 +1,5 @@
 package nl.novi.Sportsapp.controller;
 
-import com.google.maps.errors.ApiException;
 import nl.novi.Sportsapp.dto.request.AddTrainingRequest;
 import nl.novi.Sportsapp.dto.response.MessageResponse;
 import nl.novi.Sportsapp.model.Activity;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 //Single responsibility principle
@@ -33,27 +31,22 @@ public class ActivityController {
         return activityService.getActivity();
     }
 
-    @GetMapping(value = "/{activityName}") //downloaden
-    public List<Activity> getActivityByActivityName(@PathVariable String activityName) {
-        return activityService.getActivitiesByActivityName(activityName);
-    }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping(value = "/{trainerId}") // activiteit toevoegen
+    @PostMapping(value = "/trainer/{trainerId}") // activiteit toevoegen
     public ResponseEntity<Activity> addTraining(@RequestBody AddTrainingRequest addTrainingRequest,
-                                                       @PathVariable long trainerId) throws InterruptedException, ApiException, IOException {
+                                                       @PathVariable long trainerId) {
         return activityService.addTraining(trainerId, addTrainingRequest);
     }
 
-    @PutMapping(value = "/{activityId}")
+    @PutMapping(value = "/trainer/{activityId}")
     // gegevens updaten, dit gaan trainers gebruiken om trainingen te updaten (in tijd/datum)
     public Activity updateUserById(@RequestBody Activity updateTrainerActivity,
                                    @PathVariable long activityId) {
         return activityService.updateUserById(activityId, updateTrainerActivity);
     }
 
-    @DeleteMapping(value = "/{activityId}")
-    public ResponseEntity<MessageResponse> deleteActivity(@PathVariable long activityId){
+    @DeleteMapping(path = "/trainer/{activityId}")
+    public ResponseEntity<MessageResponse> deleteActivity(@PathVariable Integer activityId) {
         return activityService.deleteActivity(activityId);
     }
 
@@ -66,5 +59,6 @@ public class ActivityController {
     public ResponseEntity<MessageResponse> declineActivity(@PathVariable long activityId){
         return activityService.declineActivity(activityId);
     }
+
 
 }

@@ -10,11 +10,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class DataBaseFillerRoles implements CommandLineRunner {
+public class DataBaseFiller implements CommandLineRunner {
     private final AuthenticationService authenticationService;
 
     @Autowired
-    DataBaseFillerRoles(AuthenticationService authenticationService) {
+    DataBaseFiller(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
 
@@ -23,8 +23,6 @@ public class DataBaseFillerRoles implements CommandLineRunner {
 
         Set<String> roles = new HashSet<>();
         roles.add("admin");
-        roles.add("trainer");
-        roles.add("sporter");
 
         SignupRequest admin = new SignupRequest();
         admin.setFirstname("admin");
@@ -34,24 +32,6 @@ public class DataBaseFillerRoles implements CommandLineRunner {
         admin.setPassword("12345678");
         admin.setRole(roles);
         authenticationService.registerUser(admin);
-
-        SignupRequest trainer = new SignupRequest();
-        trainer.setFirstname("trainer");
-        trainer.setLastName("trainer");
-        trainer.setUsername("trainer");
-        trainer.setEmail("trainer@trainer.com");
-        trainer.setPassword("12345678");
-        trainer.setRole(roles);
-        authenticationService.registerUser(trainer);
-
-        SignupRequest sporter = new SignupRequest();
-        sporter.setFirstname("sporter");
-        sporter.setLastName("sporter");
-        sporter.setUsername("sporter");
-        sporter.setEmail("sporter@sporter.com");
-        sporter.setPassword("12345678");
-        sporter.setRole(roles);
-        authenticationService.registerUser(sporter);
     }
 
 }

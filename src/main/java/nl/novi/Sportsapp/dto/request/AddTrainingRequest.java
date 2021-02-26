@@ -107,4 +107,6 @@ public class AddTrainingRequest {
     public void setTrainer(UserSports trainer) {
         this.trainer = trainer;
     }
+
+
 }
