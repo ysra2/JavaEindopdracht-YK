@@ -1,7 +1,6 @@
-package nl.novi.Sportsapp.service.security.jwt;
+package nl.novi.Sportsapp.service;
 
 import nl.novi.Sportsapp.dto.request.SignupRequest;
-import nl.novi.Sportsapp.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
