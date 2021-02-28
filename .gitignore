@@ -32,3 +32,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+###ignore##
+target
+test
+
