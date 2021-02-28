@@ -3,6 +3,7 @@ package nl.novi.Sportsapp.dto.request;
 import nl.novi.Sportsapp.model.UserSports;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 
 public class AddTrainingRequest {
@@ -10,27 +11,35 @@ public class AddTrainingRequest {
     public String getActivityId;
 
     @NotBlank
+    @Size(min=2, max=30)
     private String trainingactivity;
 
     @NotBlank
+    @Size(min=2, max=30)
     private String nameTrainer;
 
     @NotBlank
+    @Size(min=2, max=30)
     private String activityName;
 
     @NotBlank
+    @Size(min=2, max=30)
     private String address;
 
     @NotBlank
+    @Size(min=2, max=30)
     private String city;
 
     @NotBlank
+    @Size(min=2, max=30)
     private String zipcode;
 
     @NotBlank
+    @Size(min=2, max=30)
     private String time;
 
     @NotBlank
+    @Size(min=2, max=30)
     private String date;
 
     private UserSports trainer;

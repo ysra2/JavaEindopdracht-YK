@@ -53,14 +53,14 @@ INSERT INTO location(location_id, lat, lng, activity_activity_id) VALUES (126, 5
 INSERT INTO location(location_id, lat, lng, activity_activity_id) VALUES (127, 51.426200, 5.475239, 118)
 
 
---//activity_type
-INSERT INTO activity_type(activity_type_id, activity_name) VALUES (111, 'Boksen')
-INSERT INTO activity_type(activity_type_id, activity_name) VALUES (112, 'Yoga')
-INSERT INTO activity_type(activity_type_id, activity_name) VALUES (113, 'Thai Boksen')
-INSERT INTO activity_type(activity_type_id, activity_name) VALUES (114, 'Bootcamp')
-INSERT INTO activity_type(activity_type_id, activity_name) VALUES (115, 'Cross Fit')
-INSERT INTO activity_type(activity_type_id, activity_name) VALUES (116, 'Kick Boksen')
-INSERT INTO activity_type(activity_type_id, activity_name) VALUES (118, 'Judo')
+-- --//activity_type
+-- INSERT INTO activity_type(activity_type_id, activity_name) VALUES (111, 'Boksen')
+-- INSERT INTO activity_type(activity_type_id, activity_name) VALUES (112, 'Yoga')
+-- INSERT INTO activity_type(activity_type_id, activity_name) VALUES (113, 'Thai Boksen')
+-- INSERT INTO activity_type(activity_type_id, activity_name) VALUES (114, 'Bootcamp')
+-- INSERT INTO activity_type(activity_type_id, activity_name) VALUES (115, 'Cross Fit')
+-- INSERT INTO activity_type(activity_type_id, activity_name) VALUES (116, 'Kick Boksen')
+-- INSERT INTO activity_type(activity_type_id, activity_name) VALUES (118, 'Judo')
 
 --//sporter_activity
 INSERT INTO sporter_activity(user_id, activity_id) VALUES (106, 111)

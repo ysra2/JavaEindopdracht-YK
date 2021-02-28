@@ -17,7 +17,7 @@ public class AppUserDetailsImpl implements UserDetails {
     private final Long userId;
     private final String username;
     private final String firstname;
-
+    private final String lastname;
     private final String email;
 
     @JsonIgnore
@@ -25,12 +25,13 @@ public class AppUserDetailsImpl implements UserDetails {
 
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public AppUserDetailsImpl(Long userId, String username, String firstname,
-                              String lastname, String email, String password,
+    public AppUserDetailsImpl(Long userId, String firstname,
+                              String lastname, String username, String email, String password,
                               Collection<? extends GrantedAuthority> authorities) {
         this.userId = userId;
-        this.username = username;
         this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
@@ -61,6 +62,10 @@ public class AppUserDetailsImpl implements UserDetails {
 
     public String getFirstname() {
         return firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
     }
 
     @Override
@@ -110,7 +115,7 @@ public class AppUserDetailsImpl implements UserDetails {
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, username, email, password, authorities);
+        return Objects.hash(userId, firstname, lastname, username, email, password, authorities);
     }
 }
 

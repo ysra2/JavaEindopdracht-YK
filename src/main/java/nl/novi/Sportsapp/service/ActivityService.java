@@ -29,7 +29,8 @@ public class ActivityService implements IActivityService {
     private UserSportsRepository userSportsRepository;
 
     //Get all activities
-    @PreAuthorize("hasRole('ROLE_TRAINER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_SPORTER')")
+    @Override
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SPORTER')")
     public List<Activity> getActivity() {
         List<Activity> activityList = activityRepository.findAll();
         return activityList;
@@ -74,7 +75,7 @@ public class ActivityService implements IActivityService {
     }
 
     //Put
-    @PreAuthorize("hasRole('ROLE_TRAINER')")
+    @PreAuthorize("hasRole('ROLE_TRAINER') or hasRole('ROLE_ADMIN')")
     @Override
     public Activity updateUserById(@Valid long activityId, Activity updateTrainerActivity) {
         return activityRepository.findById(activityId).map(
@@ -91,7 +92,8 @@ public class ActivityService implements IActivityService {
     }
 
     //Delete
-    @PreAuthorize("hasRole('ROLE_TRAINER')")
+    @Override
+    @PreAuthorize("hasRole('ROLE_TRAINER') or hasRole('ROLE_ADMIN')")
     public ResponseEntity<MessageResponse> deleteActivity(long activityId) {
         if (activityRepository.findById(activityId).isPresent()) {
             activityRepository.deleteById(activityId);
@@ -107,35 +109,35 @@ public class ActivityService implements IActivityService {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_SPORTER')")
-    public ResponseEntity<MessageResponse> acceptActivity( @Valid long activityId) {
-        Optional<Activity> activity = activityRepository.findById(activityId);
-        if (activity.isPresent()) {
-            return ResponseEntity
-                    .ok()
-                    .body(new MessageResponse("Successfully accepted!"));
-        } else {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error"));
-
-        }
-    }
-
-    @PreAuthorize("hasRole('ROLE_SPORTER')")
-    public ResponseEntity<MessageResponse> declineActivity(long activityId) {
-        Optional<Activity> activity = activityRepository.findById(activityId);
-        if (activity.isPresent()) {
-            activityRepository.deleteById(activityId);
-            return ResponseEntity
-                    .ok()
-                    .body(new MessageResponse("Activiteit Geannuleerd!"));
-        } else {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Geen activiteit gevonden."));
-
-        }
-    }
+//    @PreAuthorize("hasRole('ROLE_SPORTER') or hasRole('ROLE_ADMIN')")
+//    public ResponseEntity<MessageResponse> acceptActivity(long activityId) {
+//        Optional<Activity> activity = activityRepository.findById(activityId);
+//        if (activity.isPresent()) {
+//            return ResponseEntity
+//                    .ok()
+//                    .body(new MessageResponse("Successfully accepted!"));
+//        } else {
+//            return ResponseEntity
+//                    .badRequest()
+//                    .body(new MessageResponse("Error"));
+//
+//        }
+//    }
+//
+//    @PreAuthorize("hasRole('ROLE_SPORTER') or hasRole('ROLE_ADMIN')")
+//    public ResponseEntity<MessageResponse> declineActivity(long activityId) {
+//        Optional<Activity> activity = activityRepository.findById(activityId);
+//        if (activity.isPresent()) {
+//            activityRepository.deleteById(activityId);
+//            return ResponseEntity
+//                    .ok()
+//                    .body(new MessageResponse("Activiteit Geannuleerd!"));
+//        } else {
+//            return ResponseEntity
+//                    .badRequest()
+//                    .body(new MessageResponse("Geen activiteit gevonden."));
+//
+//        }
+//    }
 }
 

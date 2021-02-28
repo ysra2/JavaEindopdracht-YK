@@ -7,17 +7,18 @@ public class JwtResponse {
     private String type = "Bearer";
     private Long id;
     private String firstname;
+    private String lastname;
     private String username;
-    private String email;
+    //Omdat de user inlogt met zijn email en in Springboot niet die optie er is
+    //zie je bij het inloggen dat de username op emailadres wordt weergegeven ipv username zelf
     private List<String> roles;
 
-    public JwtResponse(String accessToken, Long id, String firstname, String username,
-                       String email, List<String> roles) {
+    public JwtResponse(String accessToken, Long id, String firstname, String lastname,  String username, List<String> roles) {
         this.token = accessToken;
         this.id = id;
         this.firstname = firstname;
+        this.lastname = lastname;
         this.username = username;
-        this.email = email;
         this.roles = roles;
     }
 
@@ -46,20 +47,20 @@ public class JwtResponse {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getFirstname() {
         return firstname;
     }
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getUsername() {

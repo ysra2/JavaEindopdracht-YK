@@ -153,8 +153,8 @@ public class AuthenticationService {
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getUserId(),
                 userDetails.getFirstname(),
-                userDetails.getEmail(),
-                userDetails.getPassword(),
+                userDetails.getLastname(),
+                userDetails.getUsername(),
                 roles
         ));
     }

@@ -19,34 +19,19 @@ public class UserSportsController {
     UserSportsService userSportsService;
 
 
-    @GetMapping("/trainer") //gegevens ophalen
-    public List<UserSports> getTrainers() {
-        return userSportsService.getTrainers();
+    @GetMapping("/account/{userId}") // gegevens ophalen per Id accounts
+    public UserSports getAccountById(@PathVariable long userId){
+        return userSportsService.getAccountById(userId);
     }
 
-    @GetMapping("/sporter") //gegevens ophalen
-    public List<UserSports> getSporters() {
-        return userSportsService.getTrainers();
+    @GetMapping("/accounts") //gegevens ophalen/lijst van alle geregistreerde accounts
+    public List<UserSports> getAccounts() {
+        return userSportsService.getAccounts();
     }
 
-    @GetMapping("/trainer/{userId}") // gegevens ophalen per Id trainer
-    public UserSports getTrainer(@PathVariable long userId){
-        return userSportsService.getTrainer(userId);
-    }
-
-    @GetMapping("/sporter/{userId}") // gegevens ophalen per Id sporter
-    public UserSports getSporter(@PathVariable long userId){
-        return userSportsService.getTrainer(userId);
-    }
-
-    @DeleteMapping("/admin/trainer/{id}") //gegevens verwijderen
-    public boolean deleteTrainer(@PathVariable long id){
-        return userSportsService.deleteTrainer(id);
-    }
-
-    @DeleteMapping("/admin/sporter/{id}") //gegevens verwijderen
+    @DeleteMapping("/admin/accounts/{id}") //gegevens verwijderen
     public ResponseEntity<MessageResponse> deleteSporter (@PathVariable long id){
-        return userSportsService.deleteSporter(id);
+        return userSportsService.deleteAccounts(id);
     }
 
 }

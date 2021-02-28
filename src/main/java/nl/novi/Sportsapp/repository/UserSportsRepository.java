@@ -9,5 +9,4 @@ public interface UserSportsRepository extends JpaRepository<UserSports, Long> {
     Optional<UserSports> findByEmail(String email);
     Boolean existsByEmail(String email);
     Boolean existsByUsername(String username);
-
 }

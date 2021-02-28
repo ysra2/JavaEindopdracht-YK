@@ -42,8 +42,3 @@ public class LocationController {
 
 
 }
-// address in de database opslaan
-
-//het address wordt opgeslagen als lat and lng in de database
-
-// de lat/lang wordt gebruikt als markering op de map

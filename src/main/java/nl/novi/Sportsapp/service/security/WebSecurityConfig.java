@@ -63,28 +63,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/auth/**")
                 .permitAll()
-
                 .antMatchers("/api/user_sports/**")
                 .access("hasRole('ROLE_TRAINER') or hasRole('ROLE_SPORTER') or hasRole('ROLE_ADMIN')")
-
-                .antMatchers("/api/user_sports/trainer/**")
-                .access("hasRole('ROLE_TRAINER') or hasRole('ROLE_ADMIN')")
-
-                .antMatchers("/api/user_sports/sporter/**")
-                .access(" hasRole('ROLE_SPORTER') or hasRole('ROLE_ADMIN')")
-
-                .antMatchers("/api/user_sports/admin/**")
-                .access("hasRole('ROLE_ADMIN')")
-
                 .antMatchers("/api/activity/**")
                 .access("hasRole('ROLE_TRAINER') or hasRole('ROLE_SPORTER') or hasRole('ROLE_ADMIN')")
-
-                .antMatchers("/api/activity/trainer/**")
-                .access("hasRole('ROLE_TRAINER')")
-
-                .antMatchers("/api/activity/sporter/**")
-                .access("hasRole('ROLE_SPORTER')")
-
                 .antMatchers("/api/test/**")
                 .permitAll()
                 .anyRequest().authenticated();

@@ -10,5 +10,4 @@ import java.io.Serializable;
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Serializable>, JpaSpecificationExecutor<Location> {
 
-
 }

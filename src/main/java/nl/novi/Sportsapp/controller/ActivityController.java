@@ -50,15 +50,17 @@ public class ActivityController {
         return activityService.deleteActivity(activityId);
     }
 
-    @PostMapping(value= "/sporter/accept/{activityId}")
-    public ResponseEntity<MessageResponse> acceptActivity(@PathVariable long activityId){
-        return activityService.acceptActivity(activityId);
-    }
+    //Door tijdsgebrek was het niet meer haalbaar om de accept & decline functie af te maken.
 
-    @DeleteMapping(value= "/sporter/decline/{activityId}")
-    public ResponseEntity<MessageResponse> declineActivity(@PathVariable long activityId){
-        return activityService.declineActivity(activityId);
-    }
+//    @PostMapping(value= "/sporter/accept/{activityId}")
+//    public ResponseEntity<MessageResponse> acceptActivity(@PathVariable long activityId){
+//        return activityService.acceptActivity(activityId);
+//    }
+//
+//    @DeleteMapping(value= "/sporter/decline/{activityId}")
+//    public ResponseEntity<MessageResponse> declineActivity(@PathVariable long activityId){
+//        return activityService.declineActivity(activityId);
+//    }
 
 
 }
